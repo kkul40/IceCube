@@ -8,7 +8,7 @@ public class cameraScr : MonoBehaviour
     public Transform iceCube;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
