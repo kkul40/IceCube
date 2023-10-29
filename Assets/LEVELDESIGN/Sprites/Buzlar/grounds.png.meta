@@ -79,7 +79,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 16
     mipBias: 0
     wrapU: 1
@@ -117,7 +117,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -511,7 +511,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ab117bc710f832541abfaec1168a380e
     internalID: 0
     vertices: []
     indices: 
@@ -526,6 +526,7 @@ TextureImporter:
       grounds_12: 21300024
       grounds_13: 21300026
       grounds_14: 21300028
+      grounds_15: 1755473938
       grounds_2: 21300004
       grounds_3: 21300006
       grounds_4: 21300008

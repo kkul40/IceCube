@@ -1,9 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class playerControl : MonoBehaviour
+public class PlayerControl : MonoBehaviour, IDamagable
 {
     [SerializeField] private Vector2 moveDelta = new Vector2();
     [SerializeField] private Vector2 maxForce;
@@ -11,19 +11,27 @@ public class playerControl : MonoBehaviour
     [SerializeField] private float moveForce;
     [SerializeField] private float jumpForce;
 
+    public Vector3 SpawnPosition;
+
     private void Start()
     {
         rb2 = GetComponent<Rigidbody2D>();
+        SpawnPosition = transform.position;
     }
 
     private void Update()
     {
-        moveDelta.x = Input.GetAxis("Horizontal");
-        moveDelta.y = Input.GetAxis("Vertical");
+        moveDelta.x = Input.GetAxisRaw("Horizontal");
+        moveDelta.y = Input.GetAxisRaw("Vertical");
         
         if (Input.GetKeyDown(KeyCode.Space) && !IsGrounded())
         {
             rb2.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+
+        if (transform.position.y <= -15)
+        {
+            TakeDamage();
         }
     }
 
@@ -41,9 +49,31 @@ public class playerControl : MonoBehaviour
 
         rb2.velocity = velocity;
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.transform.TryGetComponent(out Platform platform))
+        {
+            transform.parent = platform.transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.transform.TryGetComponent(out Platform platform))
+        {
+            transform.parent = null;
+        }
+    }
+
     private bool IsGrounded()
     {
         return false;
+    }
+
+    public void TakeDamage()
+    {
+        transform.position = SpawnPosition;
+        rb2.velocity = Vector3.zero;
     }
 }
