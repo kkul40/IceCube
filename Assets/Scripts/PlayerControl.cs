@@ -29,7 +29,7 @@ public class PlayerControl : MonoBehaviour, IDamagable
             rb2.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
-        if (transform.position.y <= -15)
+        if (transform.position.y <= -35)
         {
             TakeDamage();
         }
