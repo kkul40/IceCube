@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.U2D;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour, IDamagable
@@ -9,11 +10,15 @@ public class PlayerControl : MonoBehaviour, IDamagable
     [SerializeField] private float moveForce;
     [SerializeField] private float jumpForce;
 
+
+    private SpriteRenderer _spriteR;
+
     private void Start()
     {
         rb2 = GetComponent<Rigidbody2D>();
+        _spriteR = GetComponent<SpriteRenderer>();
 
-        GameData.instance.StartPos = transform;// Simdilik yaptik bunu; sonradan silicez
+        // GameData.instance.StartPos = transform;// Simdilik yaptik bunu; sonradan silicez
         
         transform.position = SaveHelper.LoadPlayerPos();
     }
@@ -22,6 +27,14 @@ public class PlayerControl : MonoBehaviour, IDamagable
     {
         moveDelta.x = Input.GetAxisRaw("Horizontal");
         moveDelta.y = Input.GetAxisRaw("Vertical");
+
+        if (moveDelta != Vector2.zero)
+        {
+            if (moveDelta.x > 0)
+                _spriteR.flipX = true;
+            else
+                _spriteR.flipX = false;
+        }
 
         if (Input.GetKeyDown(KeyCode.Space) && !IsGrounded()) rb2.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
