@@ -1,5 +1,4 @@
 using UnityEngine;
-using Cainos.LucidEditor;
 
 namespace Cainos.LucidEditor
 {
@@ -8,7 +7,7 @@ namespace Cainos.LucidEditor
     {
         public override void OnBeforeDrawProperty()
         {
-            DisableInEditModeAttribute disableInEditMode = (DisableInEditModeAttribute)attribute;
+            var disableInEditMode = (DisableInEditModeAttribute)attribute;
             property.isEditable = Application.isPlaying;
         }
     }

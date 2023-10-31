@@ -2,48 +2,47 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UnityEngine;
 using UnityEditor;
 
 namespace Cainos.LucidEditor
 {
-    internal static class TypeUtil 
+    internal static class TypeUtil
     {
         private static List<Type> cacheCustomDrawerTypes;
+
+        private static List<Type> cacheTypes;
+
         public static bool HasCustomDrawerType(Type type)
         {
             if (cacheCustomDrawerTypes == null)
             {
                 cacheCustomDrawerTypes = new List<Type>();
                 foreach (var drawer in TypeCache.GetTypesDerivedFrom<GUIDrawer>())
+                foreach (CustomPropertyDrawer customAttribute in drawer.GetCustomAttributes(
+                             typeof(CustomPropertyDrawer), true))
                 {
-                    foreach (CustomPropertyDrawer customAttribute in drawer.GetCustomAttributes(typeof(CustomPropertyDrawer), true))
-                    {
-                        var field = customAttribute.GetType().GetField("m_Type", BindingFlags.NonPublic | BindingFlags.Instance);
-                        var useForChildren = customAttribute.GetType().GetField("m_UseForChildren", BindingFlags.NonPublic | BindingFlags.Instance);
-                        var t = (Type)field.GetValue(customAttribute);
-                        
-                        if (!cacheCustomDrawerTypes.Contains(t)) cacheCustomDrawerTypes.Add(t);
-                        if ((bool)useForChildren.GetValue(customAttribute))
-                        {
-                            foreach (var d in Assembly.GetAssembly(t).GetTypes().Where(x => x.IsSubclassOf(t)))
-                            {
-                                if (!cacheCustomDrawerTypes.Contains(d)) cacheCustomDrawerTypes.Add(d);
-                            }
-                        }
-                    }
+                    var field = customAttribute.GetType()
+                        .GetField("m_Type", BindingFlags.NonPublic | BindingFlags.Instance);
+                    var useForChildren = customAttribute.GetType()
+                        .GetField("m_UseForChildren", BindingFlags.NonPublic | BindingFlags.Instance);
+                    var t = (Type)field.GetValue(customAttribute);
+
+                    if (!cacheCustomDrawerTypes.Contains(t)) cacheCustomDrawerTypes.Add(t);
+                    if ((bool)useForChildren.GetValue(customAttribute))
+                        foreach (var d in Assembly.GetAssembly(t).GetTypes().Where(x => x.IsSubclassOf(t)))
+                            if (!cacheCustomDrawerTypes.Contains(d))
+                                cacheCustomDrawerTypes.Add(d);
                 }
             }
+
             return cacheCustomDrawerTypes.Contains(type);
         }
 
-        private static List<Type> cacheTypes;
         public static Type GetType(string name)
         {
-            foreach (Type type in GetAllTypes())
-            {
-                if (type.Name == name) return type;
-            }
+            foreach (var type in GetAllTypes())
+                if (type.Name == name)
+                    return type;
             return null;
         }
 
@@ -52,10 +51,8 @@ namespace Cainos.LucidEditor
             if (cacheTypes == null)
             {
                 cacheTypes = new List<Type>();
-                foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
-                {
+                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
                     cacheTypes.AddRange(assembly.GetTypes());
-                }
             }
 
             return cacheTypes;
@@ -63,22 +60,18 @@ namespace Cainos.LucidEditor
 
         public static IEnumerable<Type> GetBaseClassesAndInterfaces(Type type, bool includeSelf = false)
         {
-            List<Type> allTypes = new List<Type>();
+            var allTypes = new List<Type>();
 
             if (includeSelf) allTypes.Add(type);
 
             if (type.BaseType == typeof(object))
-            {
                 allTypes.AddRange(type.GetInterfaces());
-            }
             else
-            {
                 allTypes.AddRange(
                     Enumerable.Repeat(type.BaseType, 1)
                         .Concat(type.GetInterfaces())
                         .Concat(GetBaseClassesAndInterfaces(type.BaseType))
                         .Distinct());
-            }
 
             return allTypes;
         }
@@ -86,7 +79,7 @@ namespace Cainos.LucidEditor
 
     internal static class GenericTypeConverter<T>
     {
-        private readonly static IDictionary<Type, object> funcs = new Dictionary<Type, object>();
+        private static readonly IDictionary<Type, object> funcs = new Dictionary<Type, object>();
 
         // static GenericTypeConverter()
         // {
@@ -111,15 +104,11 @@ namespace Cainos.LucidEditor
 
         public static T Convert<TArgument>(TArgument t1)
         {
-            Type argType = typeof(TArgument);
-            if (!funcs.ContainsKey(argType))
-            {
-                funcs.Add(argType, new Func<T, T>(o => o));
-            }
+            var argType = typeof(TArgument);
+            if (!funcs.ContainsKey(argType)) funcs.Add(argType, new Func<T, T>(o => o));
 
             var f = funcs[argType] as Func<TArgument, T>;
             return f(t1);
         }
     }
-
 }

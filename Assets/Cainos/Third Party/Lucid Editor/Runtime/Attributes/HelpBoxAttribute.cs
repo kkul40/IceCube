@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 namespace Cainos.LucidEditor
 {
@@ -12,7 +11,7 @@ namespace Cainos.LucidEditor
         public HelpBoxAttribute(string message)
         {
             this.message = message;
-            this.type = HelpBoxMessageType.Info;
+            type = HelpBoxMessageType.Info;
         }
 
         public HelpBoxAttribute(string message, HelpBoxMessageType type)

@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UnityEngine;
 using UnityEditor;
-using Cainos.LucidEditor;
+using UnityEngine;
 
 namespace Cainos.LucidEditor
 {
@@ -13,12 +12,12 @@ namespace Cainos.LucidEditor
         public static IEnumerable<InspectorProperty> CreateProperties(SerializedObject serializedObject)
         {
             var list = new List<InspectorProperty>();
-            SerializedProperty iterator = serializedObject.GetIterator();
+            var iterator = serializedObject.GetIterator();
 
             iterator.NextVisible(true);
             while (iterator.NextVisible(false))
             {
-                InspectorField ip = new InspectorField(iterator.Copy(), iterator.GetAttributes<Attribute>(true));
+                var ip = new InspectorField(iterator.Copy(), iterator.GetAttributes<Attribute>(true));
                 list.Add(ip);
             }
 
@@ -33,14 +32,15 @@ namespace Cainos.LucidEditor
             var list = new List<InspectorProperty>();
 
             if (property.serializedProperty.hasVisibleChildren &&
-                (property.serializedProperty.propertyType == SerializedPropertyType.Generic || property.serializedProperty.propertyType == SerializedPropertyType.ManagedReference) &&
+                (property.serializedProperty.propertyType == SerializedPropertyType.Generic ||
+                 property.serializedProperty.propertyType == SerializedPropertyType.ManagedReference) &&
                 !property.serializedProperty.isArray &&
                 !TypeUtil.HasCustomDrawerType(TypeUtil.GetType(property.serializedProperty.type)))
             {
                 var iterator = property.serializedProperty.Copy();
 
                 iterator.NextVisible(true);
-                int depth = iterator.depth;
+                var depth = iterator.depth;
                 list.Add(new InspectorField(iterator.Copy(), iterator.GetAttributes<Attribute>(true)));
 
                 while (iterator.NextVisible(false))
@@ -49,31 +49,32 @@ namespace Cainos.LucidEditor
                     list.Add(new InspectorField(iterator.Copy(), iterator.GetAttributes<Attribute>(true)));
                 }
 
-                object obj = property.serializedProperty.GetValue<object>();
-                list.AddRange(CreateButtonsAndNonSerializedProperties(property.serializedProperty.serializedObject, obj));
+                var obj = property.serializedProperty.GetValue<object>();
+                list.AddRange(
+                    CreateButtonsAndNonSerializedProperties(property.serializedProperty.serializedObject, obj));
             }
 
             return list;
         }
 
-        public static IEnumerable<InspectorProperty> CreateButtonsAndNonSerializedProperties(SerializedObject serializedObject, object targetObject)
+        public static IEnumerable<InspectorProperty> CreateButtonsAndNonSerializedProperties(
+            SerializedObject serializedObject, object targetObject)
         {
             var list = new List<InspectorProperty>();
 
-            foreach (MemberInfo memberInfo in ReflectionUtil.GetAllMembers(targetObject.GetType(), (BindingFlags)(-1), inherit: true))
-            {
+            foreach (var memberInfo in ReflectionUtil.GetAllMembers(targetObject.GetType(), (BindingFlags)(-1), true))
                 //field
                 if (memberInfo is FieldInfo fieldInfo)
                 {
                     if (fieldInfo.IsPublic || fieldInfo.GetCustomAttribute<SerializeField>() == null)
                     {
-                        ShowInInspectorAttribute showInInspector = fieldInfo.GetCustomAttribute<ShowInInspectorAttribute>();
+                        var showInInspector = fieldInfo.GetCustomAttribute<ShowInInspectorAttribute>();
                         if (showInInspector != null)
-                        {
-                            list.Add(new NonSerializedInspectorProperty(serializedObject, targetObject, fieldInfo.Name, fieldInfo.GetCustomAttributes().ToArray()));
-                        }
+                            list.Add(new NonSerializedInspectorProperty(serializedObject, targetObject, fieldInfo.Name,
+                                fieldInfo.GetCustomAttributes().ToArray()));
                     }
                 }
+
                 //property
                 //modified: property is now handled in CreateEditableProperties to support editing
                 //else if (memberInfo is PropertyInfo propertyInfo)
@@ -91,70 +92,62 @@ namespace Cainos.LucidEditor
                 //        }
                 //    }
                 //}
-
-
                 //method
                 else if (memberInfo is MethodInfo methodInfo)
                 {
-                    ShowInInspectorAttribute showInInspector = methodInfo.GetCustomAttribute<ShowInInspectorAttribute>();
+                    var showInInspector = methodInfo.GetCustomAttribute<ShowInInspectorAttribute>();
                     if (showInInspector != null)
-                    {
-                        list.Add(new NonSerializedInspectorProperty(serializedObject, targetObject, methodInfo.Name, methodInfo.GetCustomAttributes().ToArray()));
-                    }
+                        list.Add(new NonSerializedInspectorProperty(serializedObject, targetObject, methodInfo.Name,
+                            methodInfo.GetCustomAttributes().ToArray()));
 
-                    ButtonAttribute buttonAttribute = methodInfo.GetCustomAttribute<ButtonAttribute>();
+                    var buttonAttribute = methodInfo.GetCustomAttribute<ButtonAttribute>();
                     if (buttonAttribute != null)
                     {
                         InspectorButton ib;
                         if (string.IsNullOrEmpty(buttonAttribute.label))
-                        {
-                            ib = new InspectorButton(serializedObject, serializedObject.targetObject, methodInfo, buttonAttribute.size);
-                        }
+                            ib = new InspectorButton(serializedObject, serializedObject.targetObject, methodInfo,
+                                buttonAttribute.size);
                         else
-                        {
-                            ib = new InspectorButton(serializedObject, serializedObject.targetObject, methodInfo, buttonAttribute.label, buttonAttribute.size);
-                        }
+                            ib = new InspectorButton(serializedObject, serializedObject.targetObject, methodInfo,
+                                buttonAttribute.label, buttonAttribute.size);
                         list.Add(ib);
                     }
                 }
-            }
 
             return list;
         }
 
         //draw editable property
-        public static IEnumerable<InspectorProperty> CreateEditableProperties(SerializedObject serializedObject, object targetObject)
+        public static IEnumerable<InspectorProperty> CreateEditableProperties(SerializedObject serializedObject,
+            object targetObject)
         {
             var list = new List<InspectorProperty>();
 
-            foreach (MemberInfo memberInfo in ReflectionUtil.GetAllMembers(targetObject.GetType(), (BindingFlags)(-1), inherit: true))
-            {
+            foreach (var memberInfo in ReflectionUtil.GetAllMembers(targetObject.GetType(), (BindingFlags)(-1), true))
                 if (memberInfo is PropertyInfo propertyInfo)
                 {
-                    MethodInfo getterInfo = propertyInfo.GetGetMethod();
+                    var getterInfo = propertyInfo.GetGetMethod();
                     if (getterInfo != null)
                     {
-                        ShowInInspectorAttribute showInInspector = propertyInfo.GetCustomAttribute<ShowInInspectorAttribute>();
+                        var showInInspector = propertyInfo.GetCustomAttribute<ShowInInspectorAttribute>();
                         if (showInInspector != null)
-                        {
-                            list.Add(new EditableInspectorProperty(serializedObject, targetObject, propertyInfo.Name, propertyInfo.GetCustomAttributes().ToArray()));
-                        }
+                            list.Add(new EditableInspectorProperty(serializedObject, targetObject, propertyInfo.Name,
+                                propertyInfo.GetCustomAttributes().ToArray()));
                     }
                 }
-            }
 
             return list;
         }
 
         public static IEnumerable<InspectorProperty> GroupProperties(IEnumerable<InspectorProperty> properties)
         {
-            List<List<InspectorProperty>> groupList = new List<List<InspectorProperty>>();
+            var groupList = new List<List<InspectorProperty>>();
 
-            List<InspectorProperty> propertyList = new List<InspectorProperty>(properties);
-            List<InspectorProperty> usedProperties = new List<InspectorProperty>();
+            var propertyList = new List<InspectorProperty>(properties);
+            var usedProperties = new List<InspectorProperty>();
 
-            Dictionary<InspectorProperty, List<PropertyGroupAttribute>> paDictionary = new Dictionary<InspectorProperty, List<PropertyGroupAttribute>>();
-            foreach (InspectorProperty property in propertyList)
+            var paDictionary = new Dictionary<InspectorProperty, List<PropertyGroupAttribute>>();
+            foreach (var property in propertyList)
             {
                 paDictionary.Add(property, new List<PropertyGroupAttribute>());
                 paDictionary[property].AddRange(
@@ -164,33 +157,34 @@ namespace Cainos.LucidEditor
                 );
             }
 
-            int depth = 0;
+            var depth = 0;
             while (propertyList.Count > 0)
             {
                 groupList.Add(new List<InspectorProperty>());
 
-                foreach (InspectorProperty property in propertyList)
+                foreach (var property in propertyList)
                 {
-                    PropertyGroupAttribute attribute = paDictionary[property].FirstOrDefault(x => x.groupDepth == depth);
+                    var attribute = paDictionary[property].FirstOrDefault(x => x.groupDepth == depth);
 
                     if (attribute != null)
                     {
-                        string[] hierarchy = attribute.path.Split('/');
-                        string currentPath = string.Empty;
+                        var hierarchy = attribute.path.Split('/');
+                        var currentPath = string.Empty;
                         InspectorPropertyGroup group = null;
 
-                        for (int i = 0; i < hierarchy.Length; i++)
+                        for (var i = 0; i < hierarchy.Length; i++)
                         {
                             currentPath += hierarchy[i];
 
-                            InspectorPropertyGroup newGroup = groupList[i]
+                            var newGroup = groupList[i]
                                 .Where(x => x is InspectorPropertyGroup)
                                 .Select(x => (InspectorPropertyGroup)x)
                                 .FirstOrDefault(x => x.path.Split('/')[i] == hierarchy[i]);
 
                             if (newGroup == null)
                             {
-                                newGroup = new InspectorPropertyGroup(currentPath, property.serializedObject, attribute);
+                                newGroup = new InspectorPropertyGroup(currentPath, property.serializedObject,
+                                    attribute);
                                 groupList[i].Add(newGroup);
                                 group?.Add(newGroup);
                             }
@@ -213,17 +207,12 @@ namespace Cainos.LucidEditor
                     }
                 }
 
-                foreach (InspectorProperty property in usedProperties)
-                {
-                    propertyList.Remove(property);
-                }
+                foreach (var property in usedProperties) propertyList.Remove(property);
                 usedProperties.Clear();
                 depth++;
             }
 
             return groupList.Count > 0 ? groupList[0] : new List<InspectorProperty>();
         }
-
     }
-
 }

@@ -1,5 +1,3 @@
-using Cainos.LucidEditor;
-
 namespace Cainos.LucidEditor
 {
     [CustomAttributeProcessor(typeof(HideLabelAttribute))]

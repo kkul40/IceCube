@@ -5,12 +5,12 @@ namespace Cainos.LucidEditor.Experimental
 {
     public sealed class Toolbar
     {
-        private List<GUIContent> _items = new List<GUIContent>();
-        public IReadOnlyList<GUIContent> items => _items;
+        private readonly List<GUIContent> _items = new();
 
         public int selected;
-        public GUIStyle style = null;
         public GUI.ToolbarButtonSize size = GUI.ToolbarButtonSize.FitToContents;
+        public GUIStyle style = null;
+        public IReadOnlyList<GUIContent> items => _items;
 
         public void AddItem(string item)
         {
@@ -44,7 +44,8 @@ namespace Cainos.LucidEditor.Experimental
 
         private int Show(Rect rect, int selected)
         {
-            this.selected = GUI.Toolbar(rect, selected, _items.ToArray(), style == null ? GUI.skin.button : style, size);
+            this.selected = GUI.Toolbar(rect, selected, _items.ToArray(), style == null ? GUI.skin.button : style,
+                size);
             return this.selected;
         }
 
@@ -55,7 +56,8 @@ namespace Cainos.LucidEditor.Experimental
 
         private int ShowLayout(int selected, params GUILayoutOption[] options)
         {
-            this.selected = GUILayout.Toolbar(selected, _items.ToArray(), style == null ? GUI.skin.button : style, size, options);
+            this.selected = GUILayout.Toolbar(selected, _items.ToArray(), style == null ? GUI.skin.button : style, size,
+                options);
             return this.selected;
         }
     }

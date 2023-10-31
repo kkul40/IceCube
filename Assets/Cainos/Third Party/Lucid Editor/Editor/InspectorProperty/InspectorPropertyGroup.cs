@@ -1,13 +1,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
-using Cainos.LucidEditor;
 
 namespace Cainos.LucidEditor
 {
     public sealed class InspectorPropertyGroup : InspectorProperty
     {
-        internal InspectorPropertyGroup(string path, SerializedObject serializedObject, PropertyGroupAttribute attribute) : base(serializedObject, null, null, path.Split('/').Last(), new[] { attribute })
+        private readonly List<InspectorProperty> _childProperties = new();
+        public readonly int groupDepth;
+
+        public readonly string path;
+        private readonly PropertyGroupProcessor processor;
+
+        public bool isExpanded = true;
+
+        internal InspectorPropertyGroup(string path, SerializedObject serializedObject,
+            PropertyGroupAttribute attribute) : base(serializedObject, null, null, path.Split('/').Last(),
+            new[] { attribute })
         {
             this.path = path;
             groupDepth = path.Split('/').Count();
@@ -15,13 +24,6 @@ namespace Cainos.LucidEditor
             displayName = name;
         }
 
-        public readonly string path;
-        public readonly int groupDepth;
-        private readonly PropertyGroupProcessor processor;
-
-        public bool isExpanded = true;
-
-        private List<InspectorProperty> _childProperties = new List<InspectorProperty>();
         public IReadOnlyList<InspectorProperty> childProperties => _childProperties.AsReadOnly();
 
         internal void Add(InspectorProperty item)
@@ -40,12 +42,8 @@ namespace Cainos.LucidEditor
             if (indent > 0) LucidEditorGUILayout.BeginLayoutIndent(indent);
             {
                 if (isExpanded)
-                {
-                    foreach (InspectorProperty property in childProperties.OrderBy(x => x.order))
-                    {
+                    foreach (var property in childProperties.OrderBy(x => x.order))
                         property.Draw();
-                    }
-                }
             }
             if (indent > 0) LucidEditorGUILayout.EndLayoutIndent();
             if (!isEditable) EditorGUI.EndDisabledGroup();
@@ -56,37 +54,23 @@ namespace Cainos.LucidEditor
         internal override void Initialize()
         {
             processor?.Initialize();
-            foreach (InspectorProperty property in childProperties.OrderBy(x => x.order))
-            {
-                property.Initialize();
-            }
+            foreach (var property in childProperties.OrderBy(x => x.order)) property.Initialize();
         }
 
         internal override void Reset()
         {
             base.Reset();
-            foreach (InspectorProperty property in _childProperties)
-            {
-                property.Reset();
-            }
+            foreach (var property in _childProperties) property.Reset();
         }
 
         internal override void OnBeforeInspectorGUI()
         {
-            foreach (InspectorProperty property in childProperties)
-            {
-                property.OnBeforeInspectorGUI();
-            }
+            foreach (var property in childProperties) property.OnBeforeInspectorGUI();
         }
 
         internal override void OnAfterInspectorGUI()
         {
-            foreach (InspectorProperty property in childProperties)
-            {
-                property.OnAfterInspectorGUI();
-            }
+            foreach (var property in childProperties) property.OnAfterInspectorGUI();
         }
-
     }
-
 }

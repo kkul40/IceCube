@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 71911312237408911}
   - component: {fileID: 5436531351682598716}
   - component: {fileID: -8800271480998943276}
+  - component: {fileID: 1174171991410137266}
   m_Layer: 0
   m_Name: SawClean
   m_TagString: Untagged
@@ -133,3 +134,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c810d87ca0690043aa5d4f2e4896cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!111 &1174171991410137266
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887661382853926129}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 4e3bb6b70165a7a4688d7c9b9311b730, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 4e3bb6b70165a7a4688d7c9b9311b730, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

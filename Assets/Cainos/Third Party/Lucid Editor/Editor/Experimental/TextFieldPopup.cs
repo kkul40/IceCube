@@ -1,22 +1,22 @@
 using System;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 namespace Cainos.LucidEditor.Experimental
 {
     public class TextFieldPopup : PopupWindowContent
     {
-        public string text;
+        private bool didFocus;
+        private bool initialized;
+        public Action onCancel;
+        public Action onSubmit;
 
         public Action<string> onValueChanged;
-        public Action onSubmit;
-        public Action onCancel;
-
-        private bool submit;
-        private bool initialized;
-        private bool didFocus = false;
 
         private Rect size;
+
+        private bool submit;
+        public string text;
 
         public void Show(Rect position)
         {
@@ -39,20 +39,17 @@ namespace Cainos.LucidEditor.Experimental
                 editorWindow.Close();
             }
 
-            string textFieldName = $"{GetType().Name}:{nameof(text)}";
+            var textFieldName = $"{GetType().Name}:{nameof(text)}";
             using (var scope = new EditorGUI.ChangeCheckScope())
             {
                 GUI.SetNextControlName(textFieldName);
-                Rect fieldRect = EditorGUILayout.GetControlRect();
+                var fieldRect = EditorGUILayout.GetControlRect();
                 fieldRect.xMin -= 2.7f;
                 fieldRect.xMax += 2.7f;
                 fieldRect.yMin -= 2.7f;
                 fieldRect.yMax += 2.7f;
                 text = EditorGUI.TextField(fieldRect, text);
-                if (scope.changed)
-                {
-                    onValueChanged?.Invoke(text);
-                }
+                if (scope.changed) onValueChanged?.Invoke(text);
             }
 
             if (!didFocus)
@@ -74,5 +71,4 @@ namespace Cainos.LucidEditor.Experimental
             else onCancel?.Invoke();
         }
     }
-
 }

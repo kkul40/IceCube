@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ namespace Cainos.PixelArtPlatformer_VillageProps
 
     public class MovingPlatform : MonoBehaviour
     {
-        public float velocityInheritPercent = 0.8f;     
+        public float velocityInheritPercent = 0.8f;
 
         private List<Transform> onPlatformObjects;
 
@@ -28,10 +27,7 @@ namespace Cainos.PixelArtPlatformer_VillageProps
             velocity = (transform.position - prevPos) / Time.fixedDeltaTime;
             prevPos = transform.position;
 
-            foreach (Transform t in onPlatformObjects)
-            {
-                t.Translate(velocity * Time.fixedDeltaTime);
-            }
+            foreach (var t in onPlatformObjects) t.Translate(velocity * Time.fixedDeltaTime);
         }
 
 
@@ -42,7 +38,8 @@ namespace Cainos.PixelArtPlatformer_VillageProps
                 if (onPlatformObjects.Contains(collision.transform)) return;
 
                 onPlatformObjects.Add(collision.transform);
-                if (collision.attachedRigidbody) collision.attachedRigidbody.velocity -= velocity * velocityInheritPercent;
+                if (collision.attachedRigidbody)
+                    collision.attachedRigidbody.velocity -= velocity * velocityInheritPercent;
             }
         }
 
@@ -53,7 +50,8 @@ namespace Cainos.PixelArtPlatformer_VillageProps
                 if (onPlatformObjects.Contains(collision.transform) == false) return;
                 onPlatformObjects.Remove(collision.transform);
 
-                if (collision.attachedRigidbody) collision.attachedRigidbody.velocity += velocity * velocityInheritPercent;
+                if (collision.attachedRigidbody)
+                    collision.attachedRigidbody.velocity += velocity * velocityInheritPercent;
             }
         }
     }

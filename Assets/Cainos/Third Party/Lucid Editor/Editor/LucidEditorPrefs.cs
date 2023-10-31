@@ -17,24 +17,24 @@ namespace Cainos.LucidEditor
 
         public static T Get<T>(string key)
         {
-            T defaultValue = default(T);
-            string data = EditorPrefs.GetString(key);
+            var defaultValue = default(T);
+            var data = EditorPrefs.GetString(key);
             if (string.IsNullOrEmpty(data)) return defaultValue;
 
             switch (defaultValue)
             {
                 case long longValue:
-                    return GenericTypeConverter<T>.Convert<long>(long.Parse(data));
+                    return GenericTypeConverter<T>.Convert(long.Parse(data));
                 case int intValue:
-                    return GenericTypeConverter<T>.Convert<int>(int.Parse(data));
+                    return GenericTypeConverter<T>.Convert(int.Parse(data));
                 case float floatValue:
-                    return GenericTypeConverter<T>.Convert<float>(float.Parse(data));
+                    return GenericTypeConverter<T>.Convert(float.Parse(data));
                 case double doubleValue:
-                    return GenericTypeConverter<T>.Convert<double>(double.Parse(data));
+                    return GenericTypeConverter<T>.Convert(double.Parse(data));
                 case bool boolValue:
-                    return GenericTypeConverter<T>.Convert<bool>(bool.Parse(data));
+                    return GenericTypeConverter<T>.Convert(bool.Parse(data));
                 case string stringValue:
-                    return GenericTypeConverter<T>.Convert<string>(data);
+                    return GenericTypeConverter<T>.Convert(data);
                 default:
                     object obj = defaultValue;
                     EditorJsonUtility.FromJsonOverwrite(data, obj);
@@ -70,24 +70,24 @@ namespace Cainos.LucidEditor
 
         public static T GetConfigValue<T>(string key)
         {
-            T defaultValue = default(T);
-            string data = EditorUserSettings.GetConfigValue(key);
+            var defaultValue = default(T);
+            var data = EditorUserSettings.GetConfigValue(key);
             if (string.IsNullOrEmpty(data)) return defaultValue;
 
             switch (defaultValue)
             {
                 case long longValue:
-                    return GenericTypeConverter<T>.Convert<long>(long.Parse(data));
+                    return GenericTypeConverter<T>.Convert(long.Parse(data));
                 case int intValue:
-                    return GenericTypeConverter<T>.Convert<int>(int.Parse(data));
+                    return GenericTypeConverter<T>.Convert(int.Parse(data));
                 case float floatValue:
-                    return GenericTypeConverter<T>.Convert<float>(float.Parse(data));
+                    return GenericTypeConverter<T>.Convert(float.Parse(data));
                 case double doubleValue:
-                    return GenericTypeConverter<T>.Convert<double>(double.Parse(data));
+                    return GenericTypeConverter<T>.Convert(double.Parse(data));
                 case bool boolValue:
-                    return GenericTypeConverter<T>.Convert<bool>(bool.Parse(data));
+                    return GenericTypeConverter<T>.Convert(bool.Parse(data));
                 case string stringValue:
-                    return GenericTypeConverter<T>.Convert<string>(data);
+                    return GenericTypeConverter<T>.Convert(data);
                 default:
                     object obj = defaultValue;
                     EditorJsonUtility.FromJsonOverwrite(data, obj);
@@ -129,28 +129,23 @@ namespace Cainos.LucidEditor
 
     public sealed class GlobalPersistentData<T>
     {
+        private readonly EqualityComparer<T> comparer = EqualityComparer<T>.Default;
+
+        private readonly string key;
+        private T value;
+
         internal GlobalPersistentData(string key)
         {
             this.key = key;
             value = LucidEditorPrefs.Get<T>(key);
         }
 
-        private string key;
-        private EqualityComparer<T> comparer = EqualityComparer<T>.Default;
-        private T value;
-
         public T Value
         {
-            get
-            {
-                return value;
-            }
+            get => value;
             set
             {
-                if (!comparer.Equals(this.value, value))
-                {
-                    LucidEditorPrefs.Set<T>(key, value);
-                }
+                if (!comparer.Equals(this.value, value)) LucidEditorPrefs.Set(key, value);
                 this.value = value;
             }
         }
@@ -158,28 +153,23 @@ namespace Cainos.LucidEditor
 
     public sealed class LocalPersistentData<T>
     {
+        private readonly EqualityComparer<T> comparer = EqualityComparer<T>.Default;
+
+        private readonly string key;
+        private T value;
+
         internal LocalPersistentData(string key)
         {
             this.key = key;
             value = LucidEditorPrefs.Get<T>(key);
         }
 
-        private string key;
-        private EqualityComparer<T> comparer = EqualityComparer<T>.Default;
-        private T value;
-
         public T Value
         {
-            get
-            {
-                return value;
-            }
+            get => value;
             set
             {
-                if (!comparer.Equals(this.value, value))
-                {
-                    LucidEditorPrefs.Set<T>(key, value);
-                }
+                if (!comparer.Equals(this.value, value)) LucidEditorPrefs.Set(key, value);
                 this.value = value;
             }
         }

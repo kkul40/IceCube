@@ -1,6 +1,5 @@
-using UnityEngine;
 using UnityEditor;
-using Cainos.LucidEditor;
+using UnityEngine;
 
 namespace Cainos.LucidEditor
 {

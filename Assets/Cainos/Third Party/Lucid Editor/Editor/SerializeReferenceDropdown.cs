@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
+using UnityEngine;
 
 namespace Cainos.LucidEditor
 {
     public class SerializeReferenceDropdownItem : AdvancedDropdownItem
     {
         public readonly Type type;
+
         public SerializeReferenceDropdownItem(Type type, string name) : base(name)
         {
             this.type = type;
@@ -24,11 +25,19 @@ namespace Cainos.LucidEditor
         private static readonly string nullDisplayName = "(Null)";
 
         private Type[] types;
+
+        public SerializeReferenceDropdown(IEnumerable<Type> types, int maxLineCount, AdvancedDropdownState state) :
+            base(state)
+        {
+            SetTypes(types);
+            minimumSize = new Vector2(minimumSize.x, EditorGUIUtility.singleLineHeight * maxLineCount + headerHeight);
+        }
+
         public event Action<SerializeReferenceDropdownItem> onItemSelected;
 
         public static void AddTo(AdvancedDropdownItem root, IEnumerable<Type> types)
         {
-            int itemCount = 0;
+            var itemCount = 0;
             var nullItem = new SerializeReferenceDropdownItem(null, nullDisplayName)
             {
                 id = itemCount++
@@ -37,18 +46,15 @@ namespace Cainos.LucidEditor
 
             var typeArray = types.OrderBy(x => x.FullName);
 
-            bool isSingleNamespace = true;
-            string[] namespaces = new string[maxNamespaceNestCount];
-            foreach (Type type in typeArray)
+            var isSingleNamespace = true;
+            var namespaces = new string[maxNamespaceNestCount];
+            foreach (var type in typeArray)
             {
-                string[] splittedTypePath = GetSplittedTypePath(type);
-                if (splittedTypePath.Length <= 1)
+                var splittedTypePath = GetSplittedTypePath(type);
+                if (splittedTypePath.Length <= 1) continue;
+                for (var i = 0; splittedTypePath.Length - 1 > i; i++)
                 {
-                    continue;
-                }
-                for (int i = 0; (splittedTypePath.Length - 1) > i; i++)
-                {
-                    string ns = namespaces[i];
+                    var ns = namespaces[i];
                     if (ns == null)
                     {
                         namespaces[i] = splittedTypePath[i];
@@ -60,24 +66,20 @@ namespace Cainos.LucidEditor
                     }
                 }
 
-                if (!isSingleNamespace)
-                {
-                    break;
-                }
+                if (!isSingleNamespace) break;
             }
 
-            foreach (Type type in typeArray)
+            foreach (var type in typeArray)
             {
-                string[] splittedTypePath = GetSplittedTypePath(type);
+                var splittedTypePath = GetSplittedTypePath(type);
                 if (splittedTypePath.Length == 0) continue;
 
-                AdvancedDropdownItem parent = root;
+                var parent = root;
 
                 if (!isSingleNamespace)
-                {
-                    for (int i = 0; (splittedTypePath.Length - 1) > i; i++)
+                    for (var i = 0; splittedTypePath.Length - 1 > i; i++)
                     {
-                        AdvancedDropdownItem foundItem = GetItem(parent, splittedTypePath[i]);
+                        var foundItem = GetItem(parent, splittedTypePath[i]);
                         if (foundItem != null)
                         {
                             parent = foundItem;
@@ -86,15 +88,15 @@ namespace Cainos.LucidEditor
                         {
                             var newItem = new AdvancedDropdownItem(splittedTypePath[i])
                             {
-                                id = itemCount++,
+                                id = itemCount++
                             };
                             parent.AddChild(newItem);
                             parent = newItem;
                         }
                     }
-                }
 
-                var item = new SerializeReferenceDropdownItem(type, ObjectNames.NicifyVariableName(splittedTypePath[splittedTypePath.Length - 1]))
+                var item = new SerializeReferenceDropdownItem(type,
+                    ObjectNames.NicifyVariableName(splittedTypePath[splittedTypePath.Length - 1]))
                 {
                     id = itemCount++
                 };
@@ -102,19 +104,12 @@ namespace Cainos.LucidEditor
             }
         }
 
-        static AdvancedDropdownItem GetItem(AdvancedDropdownItem parent, string name)
+        private static AdvancedDropdownItem GetItem(AdvancedDropdownItem parent, string name)
         {
-            foreach (AdvancedDropdownItem item in parent.children)
-            {
-                if (item.name == name) return item;
-            }
+            foreach (var item in parent.children)
+                if (item.name == name)
+                    return item;
             return null;
-        }
-
-        public SerializeReferenceDropdown(IEnumerable<Type> types, int maxLineCount, AdvancedDropdownState state) : base(state)
-        {
-            SetTypes(types);
-            minimumSize = new Vector2(minimumSize.x, EditorGUIUtility.singleLineHeight * maxLineCount + headerHeight);
         }
 
         public void SetTypes(IEnumerable<Type> types)
@@ -132,24 +127,15 @@ namespace Cainos.LucidEditor
         protected override void ItemSelected(AdvancedDropdownItem item)
         {
             base.ItemSelected(item);
-            if (item is SerializeReferenceDropdownItem dropdownItem)
-            {
-                onItemSelected?.Invoke(dropdownItem);
-            }
+            if (item is SerializeReferenceDropdownItem dropdownItem) onItemSelected?.Invoke(dropdownItem);
         }
 
         private static string[] GetSplittedTypePath(Type type)
         {
-            int splitIndex = type.FullName.LastIndexOf('.');
+            var splitIndex = type.FullName.LastIndexOf('.');
             if (splitIndex >= 0)
-            {
-                return new string[] { type.FullName.Substring(0, splitIndex), type.FullName.Substring(splitIndex + 1) };
-            }
-            else
-            {
-                return new string[] { type.Name };
-            }
+                return new[] { type.FullName.Substring(0, splitIndex), type.FullName.Substring(splitIndex + 1) };
+            return new[] { type.Name };
         }
-
     }
 }

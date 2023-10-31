@@ -1,8 +1,9 @@
 using System;
-using UnityEngine;
 
 namespace Cainos.LucidEditor
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class HideMonoScriptAttribute : Attribute { }
+    public class HideMonoScriptAttribute : Attribute
+    {
+    }
 }

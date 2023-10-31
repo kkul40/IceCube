@@ -1,22 +1,24 @@
+using System;
+using System.Reflection;
 using UnityEditor;
 
 namespace Cainos.LucidEditor
 {
     public static class SerializedPropertyUtility
     {
-        public static System.Type GetUnderlyingType(this SerializedProperty property)
+        public static Type GetUnderlyingType(this SerializedProperty property)
         {
-            System.Type parentType = property.serializedObject.targetObject.GetType();
-            System.Reflection.FieldInfo fi = parentType.GetFieldViaPath(property.propertyPath);
+            var parentType = property.serializedObject.targetObject.GetType();
+            var fi = parentType.GetFieldViaPath(property.propertyPath);
             return fi.FieldType;
         }
 
-        public static System.Reflection.FieldInfo GetFieldViaPath(this System.Type type, string path)
+        public static FieldInfo GetFieldViaPath(this Type type, string path)
         {
-            System.Type parentType = type;
-            System.Reflection.FieldInfo fi = type.GetField(path);
-            string[] perDot = path.Split('.');
-            foreach (string fieldName in perDot)
+            var parentType = type;
+            var fi = type.GetField(path);
+            var perDot = path.Split('.');
+            foreach (var fieldName in perDot)
             {
                 fi = parentType.GetField(fieldName);
                 if (fi != null)
@@ -24,9 +26,10 @@ namespace Cainos.LucidEditor
                 else
                     return null;
             }
+
             if (fi != null)
                 return fi;
-            else return null;
+            return null;
         }
     }
 }

@@ -1,6 +1,3 @@
-using UnityEditor;
-using Cainos.LucidEditor;
-
 namespace Cainos.LucidEditor
 {
     [CustomAttributeProcessor(typeof(GUIColorAttribute))]
@@ -8,7 +5,7 @@ namespace Cainos.LucidEditor
     {
         public override void OnBeforeDrawProperty()
         {
-            GUIColorAttribute guiColor = (GUIColorAttribute)attribute;
+            var guiColor = (GUIColorAttribute)attribute;
             LucidEditorUtility.PushGUIColor(guiColor.useCustomColor ? guiColor.customColor : guiColor.color.ToColor());
         }
 

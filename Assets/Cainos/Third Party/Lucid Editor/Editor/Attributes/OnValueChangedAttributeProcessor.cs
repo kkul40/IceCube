@@ -1,5 +1,3 @@
-using Cainos.LucidEditor;
-
 namespace Cainos.LucidEditor
 {
     [CustomAttributeProcessor(typeof(OnValueChangedAttribute))]
@@ -9,8 +7,9 @@ namespace Cainos.LucidEditor
         {
             if (property.changed)
             {
-                OnValueChangedAttribute onValueChanged = (OnValueChangedAttribute)attribute;
-                ReflectionUtil.Invoke(property.parentObject, onValueChanged.methodName, property.serializedProperty.GetValue<object>());
+                var onValueChanged = (OnValueChangedAttribute)attribute;
+                ReflectionUtil.Invoke(property.parentObject, onValueChanged.methodName,
+                    property.serializedProperty.GetValue<object>());
             }
         }
     }

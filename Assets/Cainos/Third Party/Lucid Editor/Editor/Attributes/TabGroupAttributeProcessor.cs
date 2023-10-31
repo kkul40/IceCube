@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEditor;
-using Cainos.LucidEditor;
+using UnityEngine;
 
 namespace Cainos.LucidEditor
 {
@@ -15,12 +14,13 @@ namespace Cainos.LucidEditor
         {
             selected = GetLocalPersistentData<int>("selected");
 
-            List<string> tabList = new List<string>();
-            foreach (InspectorProperty property in group.childProperties)
+            var tabList = new List<string>();
+            foreach (var property in group.childProperties)
             {
-                TabGroupAttribute att = property.GetAttribute<TabGroupAttribute>();
+                var att = property.GetAttribute<TabGroupAttribute>();
                 if (!tabList.Contains(att.tabName)) tabList.Add(att.tabName);
             }
+
             tabArray = tabList.ToArray();
         }
 
@@ -29,13 +29,10 @@ namespace Cainos.LucidEditor
             LucidEditorGUILayout.BeginLayoutIndent(EditorGUI.indentLevel);
             selected.Value = LucidEditorGUILayout.BeginTabGroup(selected.Value, tabArray, GUILayout.MinWidth(0));
 
-            foreach (InspectorProperty property in group.childProperties)
+            foreach (var property in group.childProperties)
             {
-                TabGroupAttribute att = property.GetAttribute<TabGroupAttribute>();
-                if (att != null)
-                {
-                    property.isHidden |= att.tabName != tabArray[selected.Value];
-                }
+                var att = property.GetAttribute<TabGroupAttribute>();
+                if (att != null) property.isHidden |= att.tabName != tabArray[selected.Value];
             }
         }
 

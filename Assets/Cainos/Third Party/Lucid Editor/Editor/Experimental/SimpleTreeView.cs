@@ -11,9 +11,12 @@ namespace Cainos.LucidEditor.Experimental
 
         public Action<Rect, int> drawItemCallback;
         public Func<int, float> itemHeightCallback;
-        public event Action<IList<int>> onSelectionChanged;
 
-        public SimpleTreeView(TreeViewState treeViewState) : base(treeViewState) { }
+        public SimpleTreeView(TreeViewState treeViewState) : base(treeViewState)
+        {
+        }
+
+        public event Action<IList<int>> onSelectionChanged;
 
         public void Setup(TreeMenuItem[] baseElements)
         {
@@ -30,7 +33,7 @@ namespace Cainos.LucidEditor.Experimental
         {
             if (drawItemCallback != null)
             {
-                Rect contentRect = args.rowRect;
+                var contentRect = args.rowRect;
                 contentRect.width -= GetContentIndent(args.item);
                 contentRect.x += GetContentIndent(args.item);
 
@@ -44,10 +47,7 @@ namespace Cainos.LucidEditor.Experimental
 
         protected override float GetCustomRowHeight(int row, TreeViewItem item)
         {
-            if (itemHeightCallback != null)
-            {
-                return itemHeightCallback.Invoke(item.id);
-            }
+            if (itemHeightCallback != null) return itemHeightCallback.Invoke(item.id);
             return base.GetCustomRowHeight(row, item);
         }
 
@@ -64,13 +64,9 @@ namespace Cainos.LucidEditor.Experimental
                 if (baseElement.childElements.Count > 0)
                 {
                     if (IsExpanded(baseItem.id))
-                    {
                         AddChildrenRecursive(baseElement, baseItem, rows);
-                    }
                     else
-                    {
                         baseItem.children = CreateChildListForCollapsedParent();
-                    }
                 }
             }
 
@@ -94,13 +90,9 @@ namespace Cainos.LucidEditor.Experimental
                 if (childElement.childElements.Count > 0)
                 {
                     if (IsExpanded(childElement.id))
-                    {
                         AddChildrenRecursive(childElement, childItem, rows);
-                    }
                     else
-                    {
                         childItem.children = CreateChildListForCollapsedParent();
-                    }
                 }
             }
         }

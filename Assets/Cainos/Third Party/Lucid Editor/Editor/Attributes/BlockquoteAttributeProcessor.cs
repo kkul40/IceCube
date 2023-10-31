@@ -1,6 +1,4 @@
-using UnityEngine;
 using UnityEditor;
-using Cainos.LucidEditor;
 
 namespace Cainos.LucidEditor
 {
@@ -9,10 +7,10 @@ namespace Cainos.LucidEditor
     {
         public override void OnBeforeDrawProperty()
         {
-            BlockquoteAttribute blockquote = (BlockquoteAttribute)attribute;
-            GUIStyle style = EditorStyles.label;
+            var blockquote = (BlockquoteAttribute)attribute;
+            var style = EditorStyles.label;
             style.wordWrap = true;
-            
+
             LucidEditorGUILayout.Blockquote(blockquote.text);
         }
     }

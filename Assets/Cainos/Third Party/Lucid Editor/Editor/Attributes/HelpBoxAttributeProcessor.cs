@@ -1,5 +1,4 @@
 using UnityEditor;
-using Cainos.LucidEditor;
 
 namespace Cainos.LucidEditor
 {
@@ -8,7 +7,7 @@ namespace Cainos.LucidEditor
     {
         public override void OnBeforeDrawProperty()
         {
-            HelpBoxAttribute helpBox = (HelpBoxAttribute)attribute;
+            var helpBox = (HelpBoxAttribute)attribute;
             EditorGUILayout.HelpBox(helpBox.message, (MessageType)helpBox.type);
         }
     }

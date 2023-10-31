@@ -1,27 +1,32 @@
-using Cainos.LucidEditor;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Cainos.LucidEditor
 {
     public sealed class EditableInspectorProperty : InspectorProperty
     {
+        private readonly List<PropertyProcessor> processors = new();
         private MethodInfo getter;
-        private MethodInfo setter;
         private PropertyInfo info;
+        private MethodInfo setter;
 
-        private List<PropertyProcessor> processors = new List<PropertyProcessor>();
-        internal EditableInspectorProperty(SerializedObject serializedObject, object parentObject, string name, Attribute[] attributes) : base(serializedObject, null, parentObject, name, attributes) { }
+        internal EditableInspectorProperty(SerializedObject serializedObject, object parentObject, string name,
+            Attribute[] attributes) : base(serializedObject, null, parentObject, name, attributes)
+        {
+        }
+
+        private string Name => ObjectNames.NicifyVariableName(name);
 
         internal override void Initialize()
         {
             processors.Clear();
-            foreach (Attribute attribute in attributes)
+            foreach (var attribute in attributes)
             {
-                PropertyProcessor processor = ProcessorUtil.CreateAttributeProcessor(this, attribute);
+                var processor = ProcessorUtil.CreateAttributeProcessor(this, attribute);
 
                 if (processor != null)
                 {
@@ -31,21 +36,13 @@ namespace Cainos.LucidEditor
             }
 
             info = parentObject.GetType().GetProperty(name);
-            getter = this.info.GetGetMethod();
-            setter = this.info.GetSetMethod();
-        }
-
-        private string Name
-        {
-            get
-            {
-                return ObjectNames.NicifyVariableName(name);
-            }
+            getter = info.GetGetMethod();
+            setter = info.GetSetMethod();
         }
 
         internal override void Draw()
         {
-            foreach (PropertyProcessor processor in processors) processor.OnBeforeDrawProperty();
+            foreach (var processor in processors) processor.OnBeforeDrawProperty();
 
             if (isHidden) return;
 
@@ -54,15 +51,12 @@ namespace Cainos.LucidEditor
             {
                 //object value = ReflectionUtil.GetValue(parentObject, name);
                 //LucidEditorGUILayout.ReadOnlyField(Name, value, value.GetType());
-                if ( GetPropertyType(info, out SerializedPropertyType serialzedProertyType))
-                {
-                    Draw_Internal( serialzedProertyType);
-                }
+                if (GetPropertyType(info, out var serialzedProertyType)) Draw_Internal(serialzedProertyType);
             }
             if (!isEditable) EditorGUI.EndDisabledGroup();
             LucidEditorGUILayout.EndLayoutIndent();
 
-            foreach (PropertyProcessor processor in processors) processor.OnAfterDrawProperty();
+            foreach (var processor in processors) processor.OnAfterDrawProperty();
         }
 
         internal void Draw_Internal(SerializedPropertyType serialzedProertyType)
@@ -82,7 +76,7 @@ namespace Cainos.LucidEditor
                 var oldValue = (float)GetValue();
                 var newValue = EditorGUILayout.FloatField(Name, oldValue, emptyOptions);
                 if (oldValue != newValue)
-                   SetValue(newValue);
+                    SetValue(newValue);
             }
             else if (serialzedProertyType == SerializedPropertyType.Boolean)
             {
@@ -129,8 +123,9 @@ namespace Cainos.LucidEditor
 
             else if (serialzedProertyType == SerializedPropertyType.ObjectReference)
             {
-                var oldValue = (UnityEngine.Object)GetValue();
-                var newValue = LucidEditorGUILayout.ObjectField(Name, oldValue, info.PropertyType, !TryGetAttribute<AssetsOnlyAttribute>(out _), emptyOptions);
+                var oldValue = (Object)GetValue();
+                var newValue = LucidEditorGUILayout.ObjectField(Name, oldValue, info.PropertyType,
+                    !TryGetAttribute<AssetsOnlyAttribute>(out _), emptyOptions);
                 if (oldValue != newValue)
                     SetValue(newValue);
             }
@@ -138,7 +133,11 @@ namespace Cainos.LucidEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        private object GetValue() { return getter.Invoke(parentObject, null); }
+        private object GetValue()
+        {
+            return getter.Invoke(parentObject, null);
+        }
+
         private void SetValue(object value)
         {
             if (setter == null) return;
@@ -147,7 +146,7 @@ namespace Cainos.LucidEditor
 
         private bool GetPropertyType(PropertyInfo info, out SerializedPropertyType propertyType)
         {
-            Type type = info.PropertyType;
+            var type = info.PropertyType;
             propertyType = SerializedPropertyType.Generic;
             if (type == typeof(int))
                 propertyType = SerializedPropertyType.Integer;
@@ -165,19 +164,19 @@ namespace Cainos.LucidEditor
                 propertyType = SerializedPropertyType.Color;
             else if (type.IsEnum)
                 propertyType = SerializedPropertyType.Enum;
-            else if (type.IsSubclassOf(typeof(UnityEngine.Object)))
+            else if (type.IsSubclassOf(typeof(Object)))
                 propertyType = SerializedPropertyType.ObjectReference;
             return propertyType != SerializedPropertyType.Generic;
         }
 
         internal override void OnBeforeInspectorGUI()
         {
-            foreach (PropertyProcessor processor in processors) processor.OnBeforeInspectorGUI();
+            foreach (var processor in processors) processor.OnBeforeInspectorGUI();
         }
 
         internal override void OnAfterInspectorGUI()
         {
-            foreach (PropertyProcessor processor in processors) processor.OnAfterInspectorGUI();
+            foreach (var processor in processors) processor.OnAfterInspectorGUI();
         }
     }
 }

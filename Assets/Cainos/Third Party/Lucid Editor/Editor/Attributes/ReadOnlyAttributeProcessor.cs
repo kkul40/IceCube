@@ -1,6 +1,3 @@
-using UnityEditor;
-using Cainos.LucidEditor;
-
 namespace Cainos.LucidEditor
 {
     [CustomAttributeProcessor(typeof(ReadOnlyAttribute))]

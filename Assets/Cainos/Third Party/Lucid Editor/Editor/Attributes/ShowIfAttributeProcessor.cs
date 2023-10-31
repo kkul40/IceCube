@@ -1,5 +1,3 @@
-using Cainos.LucidEditor;
-
 namespace Cainos.LucidEditor
 {
     [CustomAttributeProcessor(typeof(ShowIfAttribute))]
@@ -7,7 +5,7 @@ namespace Cainos.LucidEditor
     {
         public override void OnBeforeDrawProperty()
         {
-            ShowIfAttribute showIf = (ShowIfAttribute)attribute;
+            var showIf = (ShowIfAttribute)attribute;
             property.isHidden |= !ReflectionUtil.GetValueBool(property.parentObject, showIf.condition);
         }
     }

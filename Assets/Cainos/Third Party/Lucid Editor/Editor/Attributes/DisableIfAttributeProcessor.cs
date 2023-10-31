@@ -1,5 +1,3 @@
-using Cainos.LucidEditor;
-
 namespace Cainos.LucidEditor
 {
     [CustomAttributeProcessor(typeof(DisableIfAttribute))]
@@ -7,7 +5,7 @@ namespace Cainos.LucidEditor
     {
         public override void OnBeforeDrawProperty()
         {
-            DisableIfAttribute disableIf = (DisableIfAttribute)attribute;
+            var disableIf = (DisableIfAttribute)attribute;
             property.isEditable = !ReflectionUtil.GetValueBool(property.parentObject, disableIf.condition);
         }
     }

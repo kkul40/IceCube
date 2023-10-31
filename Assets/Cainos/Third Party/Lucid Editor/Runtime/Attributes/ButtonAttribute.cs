@@ -5,10 +5,12 @@ namespace Cainos.LucidEditor
     [AttributeUsage(AttributeTargets.Method)]
     public class ButtonAttribute : Attribute
     {
-        public readonly string label = null;
+        public readonly string label;
         public readonly InspectorButtonSize size = InspectorButtonSize.Small;
 
-        public ButtonAttribute() { }
+        public ButtonAttribute()
+        {
+        }
 
         public ButtonAttribute(string label)
         {

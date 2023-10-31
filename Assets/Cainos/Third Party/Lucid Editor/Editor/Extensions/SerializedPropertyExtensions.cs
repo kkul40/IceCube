@@ -1,86 +1,69 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Cainos.LucidEditor
 {
     public static class SerializedPropertyExtensions
     {
-        public static bool TryGetAttribute<TAttribute>(this SerializedProperty property, out TAttribute result) where TAttribute : Attribute
+        public static bool TryGetAttribute<TAttribute>(this SerializedProperty property, out TAttribute result)
+            where TAttribute : Attribute
         {
-            return TryGetAttribute<TAttribute>(property, false, out result);
+            return TryGetAttribute(property, false, out result);
         }
 
-        public static bool TryGetAttribute<TAttribute>(this SerializedProperty property, bool inherit, out TAttribute result) where TAttribute : Attribute
+        public static bool TryGetAttribute<TAttribute>(this SerializedProperty property, bool inherit,
+            out TAttribute result) where TAttribute : Attribute
         {
-            TAttribute att = GetAttribute<TAttribute>(property, inherit);
+            var att = GetAttribute<TAttribute>(property, inherit);
             result = att;
             return att != null;
         }
 
-        public static TAttribute GetAttribute<TAttribute>(this SerializedProperty property, bool inherit = false) where TAttribute : Attribute
+        public static TAttribute GetAttribute<TAttribute>(this SerializedProperty property, bool inherit = false)
+            where TAttribute : Attribute
         {
-            if (property == null)
-            {
-                throw new ArgumentNullException(nameof(property));
-            }
+            if (property == null) throw new ArgumentNullException(nameof(property));
 
-            Type targetObjectType = property.GetParentObject().GetType();
+            var targetObjectType = property.GetParentObject().GetType();
 
             if (targetObjectType == null)
-            {
                 throw new ArgumentException($"Could not find the {nameof(targetObjectType)} of {nameof(property)}");
-            }
 
             foreach (var pathSegment in property.propertyPath.Split('.'))
             {
-                FieldInfo fieldInfo = ReflectionUtil.GetField(targetObjectType, pathSegment, (BindingFlags)(-1), inherit);
-                if (fieldInfo != null)
-                {
-                    return (TAttribute)fieldInfo.GetCustomAttribute<TAttribute>(inherit);
-                }
+                var fieldInfo = ReflectionUtil.GetField(targetObjectType, pathSegment, (BindingFlags)(-1), inherit);
+                if (fieldInfo != null) return fieldInfo.GetCustomAttribute<TAttribute>(inherit);
 
-                PropertyInfo propertyInfo = targetObjectType.GetProperty(pathSegment, (BindingFlags)(-1));
-                if (propertyInfo != null)
-                {
-                    return (TAttribute)propertyInfo.GetCustomAttribute<TAttribute>(inherit);
-                }
+                var propertyInfo = targetObjectType.GetProperty(pathSegment, (BindingFlags)(-1));
+                if (propertyInfo != null) return propertyInfo.GetCustomAttribute<TAttribute>(inherit);
             }
 
             throw new ArgumentException($"Could not find the field or property of {nameof(property)}");
         }
 
-        public static TAttribute[] GetAttributes<TAttribute>(this SerializedProperty property, bool inherit) where TAttribute : Attribute
+        public static TAttribute[] GetAttributes<TAttribute>(this SerializedProperty property, bool inherit)
+            where TAttribute : Attribute
         {
-            if (property == null)
-            {
-                throw new ArgumentNullException(nameof(property));
-            }
+            if (property == null) throw new ArgumentNullException(nameof(property));
 
-            Type targetObjectType = property.GetParentObject()?.GetType();
+            var targetObjectType = property.GetParentObject()?.GetType();
 
             if (targetObjectType == null)
-            {
                 throw new ArgumentException($"Could not find the {nameof(targetObjectType)} of {nameof(property)}");
-            }
 
             foreach (var pathSegment in property.propertyPath.Split('.'))
             {
-                FieldInfo fieldInfo = ReflectionUtil.GetField(targetObjectType, pathSegment, (BindingFlags)(-1), true);
-                if (fieldInfo != null)
-                {
-                    return (TAttribute[])fieldInfo.GetCustomAttributes<TAttribute>(inherit);
-                }
+                var fieldInfo = ReflectionUtil.GetField(targetObjectType, pathSegment, (BindingFlags)(-1), true);
+                if (fieldInfo != null) return (TAttribute[])fieldInfo.GetCustomAttributes<TAttribute>(inherit);
 
-                PropertyInfo propertyInfo = ReflectionUtil.GetProperty(targetObjectType, pathSegment, (BindingFlags)(-1), true);
-                if (propertyInfo != null)
-                {
-                    return (TAttribute[])propertyInfo.GetCustomAttributes<TAttribute>(inherit);
-                }
+                var propertyInfo = ReflectionUtil.GetProperty(targetObjectType, pathSegment, (BindingFlags)(-1), true);
+                if (propertyInfo != null) return (TAttribute[])propertyInfo.GetCustomAttributes<TAttribute>(inherit);
             }
 
             throw new ArgumentException($"Could not find the field or property of {nameof(property)}");
@@ -119,12 +102,10 @@ namespace Cainos.LucidEditor
         public static bool SetValue<T>(this SerializedProperty property, T value)
         {
             object obj = GetSerializedPropertyRootObject(property);
-            string[] fieldStructure = property.propertyPath.Split('.');
-            for (int i = 0; i < fieldStructure.Length - 1; i++)
-            {
+            var fieldStructure = property.propertyPath.Split('.');
+            for (var i = 0; i < fieldStructure.Length - 1; i++)
                 obj = GetFieldOrPropertyValue<object>(fieldStructure[i], obj);
-            }
-            string fieldName = fieldStructure.Last();
+            var fieldName = fieldStructure.Last();
 
             return SetFieldOrPropertyValue(fieldName, obj, value);
         }
@@ -176,34 +157,31 @@ namespace Cainos.LucidEditor
 
         internal static object SetManagedReferenceType(this SerializedProperty property, Type type)
         {
-            object obj = (type != null) ? Activator.CreateInstance(type) : null;
+            var obj = type != null ? Activator.CreateInstance(type) : null;
             property.managedReferenceValue = obj;
             return obj;
         }
 
-        private static UnityEngine.Object GetSerializedPropertyRootObject(SerializedProperty property)
+        private static Object GetSerializedPropertyRootObject(SerializedProperty property)
         {
-            return property.serializedObject.targetObject as UnityEngine.Object;
+            return property.serializedObject.targetObject;
         }
 
         private static T GetNestedObject<T>(string path, object obj, bool includeAllBases = false)
         {
-            string[] parts = path.Split('.');
-            for (int i = 0; i < parts.Length; i++)
+            var parts = path.Split('.');
+            for (var i = 0; i < parts.Length; i++)
             {
-                string part = parts[i];
+                var part = parts[i];
 
                 if (part == "Array")
                 {
                     var regex = new Regex(@"[^0-9]");
                     var countText = regex.Replace(parts[i + 1], "");
-                    int index = 0;
-                    if (!int.TryParse(countText, out index))
-                    {
-                        index = -1;
-                    }
+                    var index = 0;
+                    if (!int.TryParse(countText, out index)) index = -1;
 
-                    obj = Enumerable.ElementAt((obj as IEnumerable<object>), index);
+                    obj = (obj as IEnumerable<object>).ElementAt(index);
 
                     i++;
                 }
@@ -212,6 +190,7 @@ namespace Cainos.LucidEditor
                     obj = GetFieldOrPropertyValue<object>(part, obj, includeAllBases);
                 }
             }
+
             return (T)obj;
         }
 
@@ -223,32 +202,33 @@ namespace Cainos.LucidEditor
             object obj = property.serializedObject.targetObject;
             var elements = path.Split('.');
             foreach (var element in elements.Take(elements.Length - 1))
-            {
                 if (element.Contains("["))
                 {
                     var elementName = element.Substring(0, element.IndexOf("["));
-                    var index = Convert.ToInt32(element.Substring(element.IndexOf("[")).Replace("[", "").Replace("]", ""));
+                    var index = Convert.ToInt32(element.Substring(element.IndexOf("[")).Replace("[", "")
+                        .Replace("]", ""));
                     obj = ReflectionUtil.GetValue(obj, elementName, index);
                 }
                 else
                 {
                     obj = ReflectionUtil.GetValue(obj, element);
                 }
-            }
+
             return obj;
         }
 
-        private static T GetFieldOrPropertyValue<T>(string fieldName, object obj, bool includeAllBases = false, BindingFlags bindings = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+        private static T GetFieldOrPropertyValue<T>(string fieldName, object obj, bool includeAllBases = false,
+            BindingFlags bindings = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public |
+                                    BindingFlags.NonPublic)
         {
-            FieldInfo field = obj.GetType().GetField(fieldName, bindings);
+            var field = obj.GetType().GetField(fieldName, bindings);
             if (field != null) return (T)field.GetValue(obj);
 
-            PropertyInfo property = obj.GetType().GetProperty(fieldName, bindings);
+            var property = obj.GetType().GetProperty(fieldName, bindings);
             if (property != null) return (T)property.GetValue(obj, null);
 
             if (includeAllBases)
-            {
-                foreach (Type type in TypeUtil.GetBaseClassesAndInterfaces(obj.GetType()))
+                foreach (var type in TypeUtil.GetBaseClassesAndInterfaces(obj.GetType()))
                 {
                     field = type.GetField(fieldName, bindings);
                     if (field != null) return (T)field.GetValue(obj);
@@ -256,21 +236,23 @@ namespace Cainos.LucidEditor
                     property = type.GetProperty(fieldName, bindings);
                     if (property != null) return (T)property.GetValue(obj, null);
                 }
-            }
 
-            return default(T);
+            return default;
         }
 
-        private static bool SetFieldOrPropertyValue(string fieldName, object obj, object value, bool includeAllBases = false, BindingFlags bindings = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+        private static bool SetFieldOrPropertyValue(string fieldName, object obj, object value,
+            bool includeAllBases = false,
+            BindingFlags bindings = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public |
+                                    BindingFlags.NonPublic)
         {
-            FieldInfo field = obj.GetType().GetField(fieldName, bindings);
+            var field = obj.GetType().GetField(fieldName, bindings);
             if (field != null)
             {
                 field.SetValue(obj, value);
                 return true;
             }
 
-            PropertyInfo property = obj.GetType().GetProperty(fieldName, bindings);
+            var property = obj.GetType().GetProperty(fieldName, bindings);
             if (property != null)
             {
                 property.SetValue(obj, value, null);
@@ -278,8 +260,7 @@ namespace Cainos.LucidEditor
             }
 
             if (includeAllBases)
-            {
-                foreach (Type type in TypeUtil.GetBaseClassesAndInterfaces(obj.GetType()))
+                foreach (var type in TypeUtil.GetBaseClassesAndInterfaces(obj.GetType()))
                 {
                     field = type.GetField(fieldName, bindings);
                     if (field != null)
@@ -295,10 +276,8 @@ namespace Cainos.LucidEditor
                         return true;
                     }
                 }
-            }
+
             return false;
         }
-
     }
-
 }

@@ -1,13 +1,18 @@
-using UnityEngine;
-
-using Cainos.LucidEditor;
 using Cainos.Common;
+using Cainos.LucidEditor;
+using UnityEngine;
 
 namespace Cainos.PixelArtPlatformer_VillageProps
 {
     public class Elevator : MonoBehaviour
     {
-        [FoldoutGroup("Params")] public Vector2 lengthRange = new Vector2(2, 5);
+        public enum State
+        {
+            Up,
+            Down
+        }
+
+        [FoldoutGroup("Params")] public Vector2 lengthRange = new(2, 5);
         [FoldoutGroup("Params")] public float waitTime = 1.0f;
         [FoldoutGroup("Params")] public float moveSpeed = 3.0f;
         [FoldoutGroup("Params")] public State startState = State.Up;
@@ -15,39 +20,41 @@ namespace Cainos.PixelArtPlatformer_VillageProps
         [FoldoutGroup("Reference")] public Rigidbody2D platform;
         [FoldoutGroup("Reference")] public SpriteRenderer chainL;
         [FoldoutGroup("Reference")] public SpriteRenderer chainR;
+        private float curSpeed;
+        private bool isWaiting;
+        private float length;
+        private SecondOrderDynamics secondOrderDynamics = new(4.0f, 0.3f, -0.3f);
+        private float targetLength;
 
-        [FoldoutGroup("Runtime"), ShowInInspector]
+
+        private float waitTimer;
+
+        [FoldoutGroup("Runtime")]
+        [ShowInInspector]
         public float Length
         {
-            get { return length; }
+            get => length;
             set
             {
                 if (value < 0) value = 0.0f;
-                this.length = value;
+                length = value;
 
                 platform.transform.localPosition = new Vector3(0.0f, -value, 0.0f);
-                chainL.size = new Vector2(0.09375f, value - 8 * 0.03125f );
-                chainR.size = new Vector2(0.09375f, value - 8 * 0.03125f );
+                chainL.size = new Vector2(0.09375f, value - 8 * 0.03125f);
+                chainR.size = new Vector2(0.09375f, value - 8 * 0.03125f);
             }
         }
-        private float length;
 
-        [FoldoutGroup("Runtime"), ShowInInspector]
-        public State CurState
-        {
-            get { return curState; }
-            set
-            {
-                curState = value;
-            }
-        }
-        private State curState;
+        [FoldoutGroup("Runtime")]
+        [ShowInInspector]
+        public State CurState { get; set; }
 
 
-        [FoldoutGroup("Runtime"), ShowInInspector]
+        [FoldoutGroup("Runtime")]
+        [ShowInInspector]
         public bool IsWaiting
         {
-            get { return isWaiting; }
+            get => isWaiting;
             set
             {
                 if (isWaiting == value) return;
@@ -55,19 +62,12 @@ namespace Cainos.PixelArtPlatformer_VillageProps
                 waitTimer = 0.0f;
             }
         }
-        private bool isWaiting = false;
-
-
-        private float waitTimer;
-        private float curSpeed;
-        private float targetLength;
-        private SecondOrderDynamics secondOrderDynamics = new SecondOrderDynamics(4.0f, 0.3f, -0.3f);
 
 
         private void Start()
         {
-            curState = startState;
-            Length = curState == State.Up ? lengthRange.y : lengthRange.x;
+            CurState = startState;
+            Length = CurState == State.Up ? lengthRange.y : lengthRange.x;
             targetLength = Length;
 
             secondOrderDynamics.Reset(targetLength);
@@ -83,21 +83,21 @@ namespace Cainos.PixelArtPlatformer_VillageProps
             }
             else
             {
-                if (curState == State.Up)
+                if (CurState == State.Up)
                 {
                     curSpeed = -moveSpeed;
                     if (targetLength < lengthRange.x)
                     {
-                        curState = State.Down;
+                        CurState = State.Down;
                         IsWaiting = true;
                     }
                 }
-                else if (curState == State.Down)
+                else if (CurState == State.Down)
                 {
                     curSpeed = moveSpeed;
                     if (targetLength > lengthRange.y)
                     {
-                        curState = State.Up;
+                        CurState = State.Up;
                         IsWaiting = true;
                     }
                 }
@@ -109,12 +109,6 @@ namespace Cainos.PixelArtPlatformer_VillageProps
         private void FixedUpdate()
         {
             Length = secondOrderDynamics.Update(targetLength, Time.fixedDeltaTime);
-        }
-
-        public enum State
-        {
-            Up,
-            Down
         }
     }
 }
@@ -233,4 +227,3 @@ namespace Cainos.PixelArtPlatformer_VillageProps
 //        }
 //    }
 //}
-

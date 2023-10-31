@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
@@ -7,7 +6,7 @@ public class CheckPoint : MonoBehaviour
     {
         if (other.transform.TryGetComponent(out PlayerControl playerControl))
         {
-            playerControl.SpawnPosition = transform.position;
+            SaveHelper.SavePlayerPos(transform.position);
         }
     }
 }

@@ -1,26 +1,43 @@
 //https://www.youtube.com/watch?v=KPoeNZZ6H4s
 
+using System;
 using UnityEngine;
 
 namespace Cainos.Common
 {
-    [System.Serializable]
+    [Serializable]
     public struct SecondOrderDynamics
     {
-        private Vector3 xp;
-        private Vector3 y, yd;
-        private float k1, k2, k3;
-        private Vector3 xd;
-
-        private float k2_stable;
-
         [SerializeField] private float f;
         [SerializeField] private float d;
         [SerializeField] private float r;
+        private float k1, k2, k3;
+
+        private float k2_stable;
+        private Vector3 xd;
+        private Vector3 xp;
+        private Vector3 y, yd;
+
+        public SecondOrderDynamics(float frequency, float damping, float response)
+        {
+            f = 1.0f;
+            d = 0.0f;
+            r = 0.0f;
+            xp = Vector3.zero;
+            y = Vector3.zero;
+            xd = Vector3.zero;
+            yd = Vector3.zero;
+            k1 = 0.0f;
+            k2 = 0.0f;
+            k3 = 0.0f;
+            k2_stable = 0.0f;
+
+            Reset(frequency, damping, response, Vector3.zero);
+        }
 
         public float Frequency
         {
-            get { return f; }
+            get => f;
             set
             {
                 if (value <= 0.01f) value = 0.01f;
@@ -33,7 +50,7 @@ namespace Cainos.Common
 
         public float Damping
         {
-            get { return d; }
+            get => d;
             set
             {
                 if (value <= 0.01f) value = 0.01f;
@@ -45,29 +62,12 @@ namespace Cainos.Common
 
         public float Response
         {
-            get { return r; }
+            get => r;
             set
             {
                 r = value;
                 UpdateInnerParams();
             }
-        }
-
-        public SecondOrderDynamics(float frequency, float damping, float response)
-        {
-            this.f = 1.0f;
-            this.d = 0.0f;
-            this.r = 0.0f;
-            xp = Vector3.zero;
-            y = Vector3.zero;
-            xd = Vector3.zero;
-            yd = Vector3.zero;
-            k1 = 0.0f;
-            k2 = 0.0f;
-            k3 = 0.0f;
-            k2_stable = 0.0f;
-
-            Reset(frequency, damping, response, Vector3.zero);
         }
 
         public void Reset(float frequency, float damping, float response, Vector3 x0)
@@ -115,7 +115,7 @@ namespace Cainos.Common
 
         public Vector2 Update(Vector2 x, float t)
         {
-            return Update(new Vector3(x.x,x.y,0.0f), t);
+            return Update(new Vector3(x.x, x.y, 0.0f), t);
         }
 
         public float Update(float x, float t)
@@ -126,7 +126,7 @@ namespace Cainos.Common
         private void UpdateInnerParams()
         {
             k1 = d / (Mathf.PI * f);
-            k2 = 1.0f / ((2.0f * Mathf.PI * f) * (2.0f * Mathf.PI * f));
+            k2 = 1.0f / (2.0f * Mathf.PI * f * (2.0f * Mathf.PI * f));
             k3 = r * d / (2.0f * Mathf.PI * f);
         }
     }

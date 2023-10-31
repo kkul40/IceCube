@@ -1,5 +1,3 @@
-using Cainos.LucidEditor;
-
 namespace Cainos.LucidEditor
 {
     [CustomAttributeProcessor(typeof(IndentAttribute))]
@@ -7,7 +5,7 @@ namespace Cainos.LucidEditor
     {
         public override void OnBeforeDrawProperty()
         {
-            IndentAttribute indent = (IndentAttribute)attribute;
+            var indent = (IndentAttribute)attribute;
             property.indent = indent.indent;
         }
     }

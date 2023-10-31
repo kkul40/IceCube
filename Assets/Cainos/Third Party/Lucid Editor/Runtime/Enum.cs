@@ -1,7 +1,7 @@
 namespace Cainos.LucidEditor
 {
     public enum InspectorButtonSize
-    { 
+    {
         Small,
         Medium,
         Large,

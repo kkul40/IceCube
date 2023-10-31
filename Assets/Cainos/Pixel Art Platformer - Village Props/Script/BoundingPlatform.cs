@@ -1,38 +1,35 @@
 using System.Collections.Generic;
-using UnityEngine;
 using Cainos.Common;
+using UnityEngine;
 
 namespace Cainos.PixelArtPlatformer_VillageProps
 {
     public class BoundingPlatform : MonoBehaviour
     {
+        public enum State
+        {
+            Up,
+            Down
+        }
+
         public Transform platform;
 
         public float waitTime = 1.0f;
         public float retrieveSpeed = 1.0f;
         public float pushSpeed = 10.0f;
-
-        private float platformYPosDown;
-        private float platformYPosUp;
-        private float platformYPos;
-        private float waitTimer;
         private State curState = State.Down;
-
-        private Vector3 platformPrevPos;
-        private Vector2 platformVel;
-
-        private SecondOrderDynamics secondOrderDynamics = new SecondOrderDynamics(4.0f, 0.5f, -0.3f);
 
         private List<Rigidbody2D> onPlatformRigidbodies;
 
-        private void Push()
-        {
-            foreach ( Rigidbody2D rb2d in onPlatformRigidbodies)
-            {
-                rb2d.velocity += pushSpeed * Vector2.up;
-            }
-            onPlatformRigidbodies.Clear();
-        }
+        private Vector3 platformPrevPos;
+        private Vector2 platformVel;
+        private float platformYPos;
+
+        private float platformYPosDown;
+        private float platformYPosUp;
+
+        private SecondOrderDynamics secondOrderDynamics = new(4.0f, 0.5f, -0.3f);
+        private float waitTimer;
 
         private void Start()
         {
@@ -51,7 +48,7 @@ namespace Cainos.PixelArtPlatformer_VillageProps
             platformPrevPos = platform.transform.position;
 
             waitTimer += Time.fixedDeltaTime;
-            if ( waitTimer > waitTime )
+            if (waitTimer > waitTime)
             {
                 //to up
                 if (curState == State.Down)
@@ -78,7 +75,8 @@ namespace Cainos.PixelArtPlatformer_VillageProps
                 }
             }
 
-            platform.transform.localPosition = Vector3.up * secondOrderDynamics.Update(platformYPos, Time.fixedDeltaTime);
+            platform.transform.localPosition =
+                Vector3.up * secondOrderDynamics.Update(platformYPos, Time.fixedDeltaTime);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -100,10 +98,10 @@ namespace Cainos.PixelArtPlatformer_VillageProps
             }
         }
 
-        public enum State
+        private void Push()
         {
-            Up,
-            Down
+            foreach (var rb2d in onPlatformRigidbodies) rb2d.velocity += pushSpeed * Vector2.up;
+            onPlatformRigidbodies.Clear();
         }
     }
 }
