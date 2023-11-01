@@ -18,7 +18,7 @@ public class GameData : MonoBehaviour
         
         
         
-        SaveHelper.SavePlayerPos(StartPos.position);
+        // SaveHelper.SavePlayerPos(StartPos.position);
     }
 
     public void RestartScene()
