@@ -48,7 +48,7 @@ public class PlayerControl : MonoBehaviour, IDamagable
         // moveDelta.y = Input.GetAxisRaw("Vertical");
 
 
-        moveDelta = inputs.Penguin.Move.ReadValue<Vector2>();
+        //moveDelta = inputs.Penguin.Move.ReadValue<Vector2>();
 
         if (moveDelta != Vector2.zero)
         {
@@ -99,5 +99,24 @@ public class PlayerControl : MonoBehaviour, IDamagable
     private bool IsGrounded()
     {
         return false;
+    }
+
+    public void LeftButton()
+    {
+        moveDelta = Vector2.left;
+        Debug.Log("test");
+    }
+    public void RightButton()
+    {
+        moveDelta = Vector2.right;
+    }
+
+    public void ZeroPoint()
+    {
+        moveDelta = Vector2.zero;
+    } 
+    public void Jumping()
+    {
+        rb2.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 }
