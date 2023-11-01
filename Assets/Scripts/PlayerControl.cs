@@ -11,32 +11,61 @@ public class PlayerControl : MonoBehaviour, IDamagable
     [SerializeField] private float jumpForce;
 
 
+    private PlayerAnimation _playerAnimation;
+
+    private Inputs inputs;
+
+
     private SpriteRenderer _spriteR;
 
     private void Start()
     {
         rb2 = GetComponent<Rigidbody2D>();
-        _spriteR = GetComponent<SpriteRenderer>();
+        _spriteR = GetComponentInChildren<SpriteRenderer>();
+
+        _playerAnimation = GetComponentInChildren<PlayerAnimation>();
 
         // GameData.instance.StartPos = transform;// Simdilik yaptik bunu; sonradan silicez
         
         transform.position = SaveHelper.LoadPlayerPos();
     }
 
+
+    private void OnEnable()
+    {
+        inputs = new Inputs();
+        inputs.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputs.Disable();
+    }
+
     private void Update()
     {
-        moveDelta.x = Input.GetAxisRaw("Horizontal");
-        moveDelta.y = Input.GetAxisRaw("Vertical");
+        // moveDelta.x = Input.GetAxisRaw("Horizontal");
+        // moveDelta.y = Input.GetAxisRaw("Vertical");
+
+
+        moveDelta = inputs.Penguin.Move.ReadValue<Vector2>();
 
         if (moveDelta != Vector2.zero)
         {
+            _playerAnimation._animator.SetBool("isWalking", true);
+            
+            
             if (moveDelta.x > 0)
-                _spriteR.flipX = true;
-            else
                 _spriteR.flipX = false;
+            else
+                _spriteR.flipX = true;
+        }
+        else
+        {
+            _playerAnimation._animator.SetBool("isWalking", false);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !IsGrounded()) rb2.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        if (inputs.Penguin.Zipla.triggered && !IsGrounded()) rb2.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
         if (transform.position.y <= -35) TakeDamage();
     }
