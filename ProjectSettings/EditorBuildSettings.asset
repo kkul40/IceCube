@@ -7,7 +7,11 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/MainMenuScene.unity
+<<<<<<< Updated upstream
     guid: be6269bd33d8d2b4589ca6f6a92b3fbd
+=======
+    guid: 6c8841ccc13bea042b10330aeabe5385
+>>>>>>> Stashed changes
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 2cda990e2423bbf4892e6590ba056729
