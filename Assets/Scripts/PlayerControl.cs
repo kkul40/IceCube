@@ -1,5 +1,4 @@
 using System;
-using UnityEditor.U2D;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour, IDamagable
