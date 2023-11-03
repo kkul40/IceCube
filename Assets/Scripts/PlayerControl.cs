@@ -47,7 +47,7 @@ public class PlayerControl : MonoBehaviour, IDamagable
         // moveDelta.y = Input.GetAxisRaw("Vertical");
 
 
-        moveDelta = inputs.Penguin.Move.ReadValue<Vector2>();
+        //moveDelta = inputs.Penguin.Move.ReadValue<Vector2>();
 
         if (moveDelta != Vector2.zero)
         {
