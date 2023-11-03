@@ -43,11 +43,13 @@ public class PlayerControl : MonoBehaviour, IDamagable
 
     private void Update()
     {
-        // moveDelta.x = Input.GetAxisRaw("Horizontal");
-        // moveDelta.y = Input.GetAxisRaw("Vertical");
+        # if UNITY_EDITOR
+         moveDelta.x = Input.GetAxisRaw("Horizontal");
+         moveDelta.y = Input.GetAxisRaw("Vertical");
 
 
-        //moveDelta = inputs.Penguin.Move.ReadValue<Vector2>();
+        moveDelta = inputs.Penguin.Move.ReadValue<Vector2>();
+        # endif
 
         if (moveDelta != Vector2.zero)
         {

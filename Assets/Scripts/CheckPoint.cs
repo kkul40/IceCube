@@ -7,7 +7,6 @@ public class CheckPoint : MonoBehaviour
         if (other.transform.TryGetComponent(out PlayerControl playerControl))
         {
             SaveHelper.SavePlayerPos(transform.position);
-            
         }
     }
 } 
