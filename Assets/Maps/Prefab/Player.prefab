@@ -4979,7 +4979,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -13.79, y: -3.32, z: 0}
-  m_LocalScale: {x: 0.4731, y: 0.4731, z: 0.4731}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.4731}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3567583772892215874}
@@ -5003,7 +5003,7 @@ MonoBehaviour:
   maxForce: {x: 7.5, y: 50}
   rb2: {fileID: 3878220796936228529}
   moveForce: 5
-  jumpForce: 150
+  jumpForce: 130
 --- !u!50 &3878220796936228529
 Rigidbody2D:
   serializedVersion: 4
