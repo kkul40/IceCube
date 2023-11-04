@@ -99,7 +99,7 @@ public class PlayerControl : MonoBehaviour, IDamagable
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawCube(transform.position, Vector2.one);
+        // Gizmos.DrawCube(transform.position, Vector2.one);
     }
 
     private bool IsGrounded()
