@@ -66,7 +66,7 @@ public class PlayerControl : MonoBehaviour, IDamagable
             _playerAnimation._animator.SetBool("isWalking", false);
         }
 
-        if (inputs.Penguin.Zipla.triggered && !IsGrounded()) rb2.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        if (inputs.Penguin.Zipla.triggered && IsGrounded()) rb2.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
         if (transform.position.y <= -35) TakeDamage();
     }
@@ -97,8 +97,20 @@ public class PlayerControl : MonoBehaviour, IDamagable
         GameData.instance.RestartScene();
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawCube(transform.position, Vector2.one);
+    }
+
     private bool IsGrounded()
     {
+        var overlaps = Physics2D.OverlapBoxAll(transform.position, Vector2.one, 0f);
+        
+        foreach (var overlap in overlaps)
+        {
+            if (!overlap.CompareTag("Player") && !overlap.CompareTag("CheckPoint")) return true;
+        }
+
         return false;
     }
 
