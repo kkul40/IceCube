@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 3021528891036098158}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.9162416, z: -0.8770361}
+  m_LocalPosition: {x: 0, y: -1.26863, z: -0.8770361}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -93,6 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1089608608281455220}
+  - component: {fileID: 6656486245199216186}
   m_Layer: 0
   m_Name: 'Bazuka '
   m_TagString: Untagged
@@ -118,6 +119,22 @@ Transform:
   - {fileID: 6401494467347799025}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &6656486245199216186
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3359115058061818291}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 63e84ab9d05420648a04f2510ba89d41, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 63e84ab9d05420648a04f2510ba89d41, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &4001058944148143880
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +161,7 @@ Transform:
   m_GameObject: {fileID: 4001058944148143880}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.06137085, y: -0.5277977, z: -0.8770361}
+  m_LocalPosition: {x: -0.06137085, y: -7.7126694, z: -0.8770361}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -228,7 +245,7 @@ Transform:
   m_GameObject: {fileID: 6468469814270564524}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.854869, z: -0.8770361}
+  m_LocalPosition: {x: 0, y: -1.33, z: -0.8770361}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

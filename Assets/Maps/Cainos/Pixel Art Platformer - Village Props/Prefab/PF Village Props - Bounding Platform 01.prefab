@@ -252,8 +252,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platform: {fileID: 7108214205482596743}
-  waitTime: 1
-  retrieveSpeed: 1
+  waitTime: 5
+  retrieveSpeed: 5
   pushSpeed: 15
 --- !u!61 &4079092231987273743
 BoxCollider2D:
