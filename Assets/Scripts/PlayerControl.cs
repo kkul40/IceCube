@@ -89,6 +89,11 @@ public class PlayerControl : MonoBehaviour, IDamagable
         if (other.transform.TryGetComponent(out Platform platform)) transform.parent = platform.transform;
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.transform.TryGetComponent(out IInteractable interact)) interact.Collect();
+    }
+
     private void OnCollisionExit2D(Collision2D other)
     {
         if (other.transform.TryGetComponent(out Platform platform)) transform.parent = null;

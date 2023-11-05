@@ -60,7 +60,7 @@ public class RewardAD : MonoBehaviour
         {
             rewardedAd.Show((Reward reward) =>
             {
-                
+               SaveHelper.SaveCandy(5);
             });
         }
     }

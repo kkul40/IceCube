@@ -7,10 +7,17 @@ public class GameData : MonoBehaviour
     public static GameData instance;
     public Transform StartPos;
 
+    private int candyCount;
+
+    public int CandyCount
+    {
+        get { return candyCount;}
+        set { candyCount = value; }
+    }
+
     private void Awake()
     {
         Application.targetFrameRate = 120;
-
 
         if (instance == null)
         {
@@ -21,9 +28,6 @@ public class GameData : MonoBehaviour
             Destroy(this);
         
         DontDestroyOnLoad(this);
-
-      
-
 
         
     }

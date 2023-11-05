@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public static class SaveHelper
 {
+    public static event Action OnCandyCollected; 
+    
     /// <summary>
     /// Saves Player Position
     /// </summary>
@@ -35,5 +38,18 @@ public static class SaveHelper
     public static void ResetData()
     {
         SavePlayerPos(GameData.instance.StartPos.position);
+    }
+    
+    public static void SaveCandy(int addCandy)
+    {
+        int a = GetCandyCount() + addCandy;
+        PlayerPrefs.SetInt("CandyCount", a);
+        OnCandyCollected?.Invoke();
+    }
+
+    public static int GetCandyCount()
+    {
+        // OnCandyCollected?.Invoke();
+        return PlayerPrefs.GetInt("CandyCount");
     }
 }
