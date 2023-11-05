@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-
+ 
+    
     void Start()
     {
         
@@ -13,8 +15,10 @@ public class SceneController : MonoBehaviour
 
     void Update()
     {
-        
+
     }
+
+   
 
    
     public void StartScene()

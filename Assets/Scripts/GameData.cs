@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 public class GameData : MonoBehaviour
 {
     public static GameData instance;
-
     public Transform StartPos;
 
     private void Awake()
@@ -22,6 +21,11 @@ public class GameData : MonoBehaviour
             Destroy(this);
         
         DontDestroyOnLoad(this);
+
+      
+
+
+        
     }
 
     public void RestartScene()
