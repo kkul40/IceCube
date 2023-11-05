@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d50c67f3fc84da0913b2a229282b8b6, type: 3}
+  m_Name: Cool
+  m_EditorClassIdentifier: 
+  name: Cool
+  price: 0
+  icon: {fileID: 21300000, guid: 17efae84a6535084fbf920c012f368a8, type: 3}
+  isSold: 0
+  Prefab: {fileID: 2581897089315809570, guid: 631915fc4a2b6c94da7eb544d4f0fb58, type: 3}
