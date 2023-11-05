@@ -9,6 +9,8 @@ public class GameData : MonoBehaviour
 
     private int candyCount;
 
+    public GameObject currentHat;
+
     public int CandyCount
     {
         get { return candyCount;}
