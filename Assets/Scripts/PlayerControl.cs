@@ -10,6 +10,8 @@ public class PlayerControl : MonoBehaviour, IDamagable
     [SerializeField] private float jumpForce;
 
 
+    public int CandyCount;
+
     private PlayerAnimation _playerAnimation;
 
     private Inputs inputs;
