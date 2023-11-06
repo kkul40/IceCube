@@ -15,9 +15,6 @@ public class IAPmanager : MonoBehaviour
     }
     public void OnPurchaseFailed(Product product, PurchaseFailureReason purchaseFailureReason)
     {
-        if (product.definition.id == ads)
-        {
-            print("baþarýsýz");
-        }
+        print("baþarýsýz");
     }
 }
