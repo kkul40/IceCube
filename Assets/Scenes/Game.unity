@@ -26582,7 +26582,7 @@ Transform:
   m_GameObject: {fileID: 1305617457}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 941.86, y: 67.51, z: -10}
+  m_LocalPosition: {x: -13, y: 2.9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -53176,8 +53176,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '
 
-    You''re welcome! You''ve successfully completed the task. Task
-    2 is coming soon, so keep watching.'
+    You''re welcome! You''ve successfully completed the task. Task 2
+    is coming soon, so keep watching.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -53792,7 +53792,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1617844191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62756,7 +62756,7 @@ Transform:
   m_GameObject: {fileID: 2068624505}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 941.86, y: 67.51, z: -10}
+  m_LocalPosition: {x: -13, y: 2.9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -64080,11 +64080,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2572756708273174185, guid: ad8fc3d79a7c26142be5f4fa43c0ebed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 941.86
+      value: -13
       objectReference: {fileID: 0}
     - target: {fileID: 2572756708273174185, guid: ad8fc3d79a7c26142be5f4fa43c0ebed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 67.51
+      value: 2.9
       objectReference: {fileID: 0}
     - target: {fileID: 2572756708273174185, guid: ad8fc3d79a7c26142be5f4fa43c0ebed, type: 3}
       propertyPath: m_LocalPosition.z
