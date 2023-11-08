@@ -26,6 +26,8 @@ public class PlayerControl : MonoBehaviour, IDamagable
     private SpriteRenderer _spriteR;
     private bool MovementLock;
 
+    private bool isDead;
+
     private void Start()
     {
         rb2 = GetComponent<Rigidbody2D>();
@@ -35,6 +37,7 @@ public class PlayerControl : MonoBehaviour, IDamagable
 
         // GameData.instance.StartPos = transform;// Simdilik yaptik bunu; sonradan silicez
         MovementLock = false;
+        isDead = false;
         transform.position = SaveHelper.LoadPlayerPos();
     }
 
@@ -113,6 +116,9 @@ public class PlayerControl : MonoBehaviour, IDamagable
 
     public void TakeDamage()
     {
+        if (isDead) return;
+        
+        isDead = true;
         StartCoroutine(OlumEffecti());
     }
 
