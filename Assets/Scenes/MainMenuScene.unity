@@ -1224,14 +1224,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.20946193, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: eca52d51b103d124c9aedd2be1a44d93, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2352,7 +2352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1985128124560897211, guid: 2c5b77ff1ef4fa545bf6fcfd4dc6abd8, type: 3}
       propertyPath: m_Color.a
-      value: 0.61960787
+      value: 0.3254902
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3448,6 +3448,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3854014426916318594, guid: b99f1342dbed59c46b1d043e90bb6c6d, type: 3}
+      propertyPath: m
+      value: 
+      objectReference: {fileID: 1808516755}
     - target: {fileID: 6356025970621385670, guid: b99f1342dbed59c46b1d043e90bb6c6d, type: 3}
       propertyPath: m_Name
       value: ReklamADS
@@ -5024,6 +5028,26 @@ PrefabInstance:
     - target: {fileID: 1807437202290709293, guid: 3dde1d5d38c6eed4384e15bfce89dd97, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1843256686345004378, guid: 3dde1d5d38c6eed4384e15bfce89dd97, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: eca52d51b103d124c9aedd2be1a44d93, type: 3}
+    - target: {fileID: 1843256686345004378, guid: 3dde1d5d38c6eed4384e15bfce89dd97, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1843256686345004378, guid: 3dde1d5d38c6eed4384e15bfce89dd97, type: 3}
+      propertyPath: m_Color.g
+      value: 0.048322916
+      objectReference: {fileID: 0}
+    - target: {fileID: 1843256686345004378, guid: 3dde1d5d38c6eed4384e15bfce89dd97, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035319469702284810, guid: 3dde1d5d38c6eed4384e15bfce89dd97, type: 3}
+      propertyPath: m_text
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3095322732853407775, guid: 3dde1d5d38c6eed4384e15bfce89dd97, type: 3}
       propertyPath: sapkaPrefab
