@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6258860140888495785}
   - component: {fileID: 7652900777429200093}
   - component: {fileID: 6532968693665510987}
+  - component: {fileID: 595018685488848631}
   m_Layer: 0
   m_Name: CheckPoint
   m_TagString: CheckPoint
@@ -143,3 +144,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &595018685488848631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2186747828004972422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9105bdfe4b7bf764fbc556435949e6cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ParticalPrefab: {fileID: 443653445314069266, guid: 7e3e8e2f6ecdbb04a982af0a14f2d887, type: 3}

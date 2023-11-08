@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerControl : MonoBehaviour, IDamagable
 {
@@ -8,6 +10,10 @@ public class PlayerControl : MonoBehaviour, IDamagable
     [SerializeField] private Rigidbody2D rb2;
     [SerializeField] private float moveForce;
     [SerializeField] private float jumpForce;
+
+    [SerializeField] private Transform OlumEffectPrefab;
+
+    public PostProcessVolume ppVolum;
 
 
     public int CandyCount;
@@ -18,6 +24,7 @@ public class PlayerControl : MonoBehaviour, IDamagable
 
 
     private SpriteRenderer _spriteR;
+    private bool MovementLock;
 
     private void Start()
     {
@@ -27,7 +34,7 @@ public class PlayerControl : MonoBehaviour, IDamagable
         _playerAnimation = GetComponentInChildren<PlayerAnimation>();
 
         // GameData.instance.StartPos = transform;// Simdilik yaptik bunu; sonradan silicez
-        
+        MovementLock = false;
         transform.position = SaveHelper.LoadPlayerPos();
     }
 
@@ -53,7 +60,7 @@ public class PlayerControl : MonoBehaviour, IDamagable
         moveDelta = inputs.Penguin.Move.ReadValue<Vector2>();
         # endif
 
-        if (moveDelta != Vector2.zero)
+        if (moveDelta != Vector2.zero && !MovementLock)
         {
             _playerAnimation._animator.SetBool("isWalking", true);
             
@@ -75,6 +82,11 @@ public class PlayerControl : MonoBehaviour, IDamagable
 
     private void FixedUpdate()
     {
+        if (MovementLock)
+        {
+            rb2.velocity = Vector3.zero;
+            return;
+        }
         if (Math.Abs(rb2.velocity.x) < maxForce.x) rb2.AddForce(moveDelta * moveForce, ForceMode2D.Impulse);
         // Debug.Log(rb2.velocity.y);
         var velocity = rb2.velocity;
@@ -101,6 +113,23 @@ public class PlayerControl : MonoBehaviour, IDamagable
 
     public void TakeDamage()
     {
+        StartCoroutine(OlumEffecti());
+    }
+
+    IEnumerator OlumEffecti()
+    {
+        var temp = Instantiate(OlumEffectPrefab, transform);
+        Destroy(temp.gameObject, 1);
+        MovementLock = true;
+        rb2.gravityScale = 0f;
+
+        while (ppVolum.weight <= 0)
+        {
+            Mathf.SmoothDamp(ppVolum.weight, 0, ref ppVolum.weight, Time.deltaTime);
+        }
+            
+
+        yield return new WaitForSeconds(1f);
         GameData.instance.RestartScene();
     }
 

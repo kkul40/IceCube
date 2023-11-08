@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Cainos.PixelArtPlatformer_VillageProps
 {
-    public class Chest : MonoBehaviour
+    public class Chest : MonoBehaviour, IInteractable
     {
         [FoldoutGroup("Reference")] public Animator animator;
 
@@ -36,6 +36,12 @@ namespace Cainos.PixelArtPlatformer_VillageProps
         public void Close()
         {
             IsOpened = false;
+        }
+
+        public void Collect()
+        {
+            Open();
+            Time.timeScale = 0.5f;
         }
     }
 }
