@@ -123,9 +123,10 @@ public class PlayerControl : MonoBehaviour, IDamagable
         MovementLock = true;
         rb2.gravityScale = 0f;
 
-        while (ppVolum.weight <= 0)
+        float velocity = 0f;
+        while (ppVolum.weight <= 0.01f)
         {
-            Mathf.SmoothDamp(ppVolum.weight, 0, ref ppVolum.weight, Time.deltaTime);
+            Mathf.SmoothDamp(ppVolum.weight, 0, ref velocity, Time.deltaTime);
         }
             
 
