@@ -1,27 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
- 
-    
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-
-    }
-
-   
-
+    public AudioClip startSound;
    
     public void StartScene()
+    {
+        MusicManager.instance.PlayAudio(startSound);
+        
+        Invoke(nameof(LoadScene),0.5f);
+    }
+
+    private void LoadScene()
     {
         SceneManager.LoadScene("Scenes/Game");
     }

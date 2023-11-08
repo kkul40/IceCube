@@ -12,20 +12,39 @@ public class UiManager : MonoBehaviour
     [Header("Music")] private int b;
 
 
+    public AudioClip TogglePauseSound;
+    public AudioClip RestartGameSound;
+    public AudioClip MainMenuSound;
+
+
+    public void ToggleMusicOnOff()
+    {
+        MusicManager.instance.ToggleMusic();
+    }
 
     public void TogglePauseMenu()
     {
+        MusicManager.instance.PlayAudio(TogglePauseSound);
         PauseMenu.SetActive(!PauseMenu.activeInHierarchy);
     }
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene(0);
+        MusicManager.instance.PlayAudio(MainMenuSound);
+        StartCoroutine(LoadScene(0));
     }
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(1);
         //TODO Sahne yeniden yuklenince en bastan baslamasi lazim
+
+        MusicManager.instance.PlayAudio(RestartGameSound);
+        StartCoroutine(LoadScene(1));
+    }
+
+    IEnumerator LoadScene(int a)
+    {
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(a);
     }
 }

@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83640cbe050758a4087b5b2509b6ada2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkPointAudio: {fileID: 8300000, guid: 948517fb342da0e4282e549525591281, type: 3}
 --- !u!61 &7652900777429200093
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -15,6 +15,8 @@ public class PlayerControl : MonoBehaviour, IDamagable
 
     public PostProcessVolume ppVolum;
 
+    public AudioClip olumMusic;
+
 
     public int CandyCount;
 
@@ -120,6 +122,7 @@ public class PlayerControl : MonoBehaviour, IDamagable
         
         isDead = true;
         StartCoroutine(OlumEffecti());
+        StartCoroutine(MusicManager.instance.LowerSound());
     }
 
     IEnumerator OlumEffecti()
@@ -130,12 +133,13 @@ public class PlayerControl : MonoBehaviour, IDamagable
         rb2.gravityScale = 0f;
 
         float velocity = 1f;
-        while (ppVolum.weight < 1)
+        
+        MusicManager.instance.PlayAudio(olumMusic);
+        while (ppVolum.weight < 0.99f)
         {
-            ppVolum.weight = Mathf.SmoothDamp(ppVolum.weight, 1, ref velocity, 3);
+            ppVolum.weight = Mathf.SmoothDamp(ppVolum.weight, 1, ref velocity, 1);
             yield return new WaitForEndOfFrame();
         }
-            
 
         yield return new WaitForSeconds(1f);
         GameData.instance.RestartScene();
