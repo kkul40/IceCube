@@ -7,6 +7,8 @@ namespace Cainos.PixelArtPlatformer_VillageProps
     {
         [FoldoutGroup("Reference")] public Animator animator;
 
+        public AudioClip chestSound;
+
         private bool isOpened;
 
         [FoldoutGroup("Runtime")]
@@ -41,6 +43,7 @@ namespace Cainos.PixelArtPlatformer_VillageProps
         public void Collect()
         {
             Open();
+            MusicManager.instance.PlayAudio(chestSound);
             Time.timeScale = 0.5f;
         }
     }

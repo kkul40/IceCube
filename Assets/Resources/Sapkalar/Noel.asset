@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d50c67f3fc84da0913b2a229282b8b6, type: 3}
-  m_Name: Chef
+  m_Name: Noel
   m_EditorClassIdentifier: 
-  name: Chef
+  names: Noel
   price: 0
-  icon: {fileID: 21300000, guid: 3538dca54c27a76438133421032a5a78, type: 3}
+  icon: {fileID: 21300000, guid: 97e998bd2ece4ad48989f11b503ad950, type: 3}
   isSold: 0
-  Prefab: {fileID: 6292050312817382799, guid: d6ac2bf66899e5642bd04b7196348ea4, type: 3}
+  Prefab: {fileID: 1123264696296559351, guid: 74ed3e8f6edd0b545bac0837c47079fa, type: 3}

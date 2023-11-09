@@ -13,6 +13,8 @@ public class PlayerControl : MonoBehaviour, IDamagable
 
     [SerializeField] private Transform OlumEffectPrefab;
 
+    public Transform SapkaSlotu;
+
     public PostProcessVolume ppVolum;
 
     public AudioClip olumMusic;

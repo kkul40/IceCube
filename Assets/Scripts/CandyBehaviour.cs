@@ -2,11 +2,11 @@
 
 public class CandyBehaviour : MonoBehaviour, IInteractable
 {
-    public int howManyCandy;
-    
+    public AudioClip candySound;
     public void Collect()
     {
-        SaveHelper.SaveCandy(howManyCandy);
+        MusicManager.instance.PlayAudio(candySound);
+        SaveHelper.SaveCandy(1);
         Destroy(this.gameObject);
     }
 }

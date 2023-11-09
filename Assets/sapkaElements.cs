@@ -5,6 +5,9 @@ using UnityEngine;
 public class sapkaElements : MonoBehaviour
 {
     public List<Sapka> sapkalar;
+    public Sapka selectedSapka;
+
+    public Transform slot;
     
     
     // Start is called before the first frame update
@@ -14,12 +17,15 @@ public class sapkaElements : MonoBehaviour
         foreach (var item in temp)
         {
             sapkalar.Add(item);
+            var slott = Instantiate(slot, transform);
+            slott.GetComponent<SapkaSlot>().sapka = item;
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SelectSapka(Sapka sapka)
     {
-        
+        selectedSapka = sapka;
+        PurchasedManager.instance.currentSapka = sapka;
     }
+
 }
