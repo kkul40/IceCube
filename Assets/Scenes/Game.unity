@@ -19231,13 +19231,13 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2072946589}
-        m_TargetAssemblyTypeName: MusicManager, Assembly-CSharp
-        m_MethodName: SetMusicVolume
-        m_Mode: 2
+      - m_Target: {fileID: 921832715}
+        m_TargetAssemblyTypeName: MusicVolumeSlider, Assembly-CSharp
+        m_MethodName: OnChangeMusic
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 921832714}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -53642,13 +53642,13 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2072946589}
-        m_TargetAssemblyTypeName: MusicManager, Assembly-CSharp
-        m_MethodName: SetSoundEffectVolume
-        m_Mode: 2
+      - m_Target: {fileID: 1580909123}
+        m_TargetAssemblyTypeName: MusicVolumeSlider, Assembly-CSharp
+        m_MethodName: OnChangeSoundEffect
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1580909124}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -64022,17 +64022,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2712389061111892534, guid: 71359bf7774406d4f9207c95cb7038d3, type: 3}
   m_PrefabInstance: {fileID: 2072794310}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2072946589 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2629338550737333368, guid: 93c81d72cfb4bd94885d38b03eba2739, type: 3}
-  m_PrefabInstance: {fileID: 5176606415368819182}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 344de48e7c3d3d7449a9873cf291980e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2073193022
 PrefabInstance:
   m_ObjectHideFlags: 0
