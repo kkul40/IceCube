@@ -827,7 +827,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b4b4c34e85e0154382475b24e800f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sapkalar: []
+  sapkalar:
+  - {fileID: 11400000, guid: d21277413c042f54eb3d236a10ae3396, type: 2}
+  - {fileID: 11400000, guid: b50581e528285374c99578de5dce8d70, type: 2}
+  - {fileID: 11400000, guid: dff3573813b30a948a5670a9aaffef62, type: 2}
+  - {fileID: 11400000, guid: 518fcbb58182be34e8cebcff8c68847b, type: 2}
+  - {fileID: 11400000, guid: 9a1eb70f7ea09654e869d2699e2edfca, type: 2}
+  - {fileID: 11400000, guid: ba84bb7ba3994c04b887bf606e8f7044, type: 2}
   selectedSapka: {fileID: 0}
   slot: {fileID: 1807437202290709293, guid: 3dde1d5d38c6eed4384e15bfce89dd97, type: 3}
 --- !u!1 &284988977

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Noel
   m_EditorClassIdentifier: 
   names: Noel
-  price: 0
+  price: 10
   icon: {fileID: 21300000, guid: 97e998bd2ece4ad48989f11b503ad950, type: 3}
   isSold: 0
   Prefab: {fileID: 1123264696296559351, guid: 74ed3e8f6edd0b545bac0837c47079fa, type: 3}

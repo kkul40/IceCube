@@ -13,19 +13,17 @@ public class sapkaElements : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var temp = Resources.FindObjectsOfTypeAll<Sapka>();
-        foreach (var item in temp)
+        foreach (var sapka in sapkalar)
         {
-            sapkalar.Add(item);
             var slott = Instantiate(slot, transform);
-            slott.GetComponent<SapkaSlot>().sapka = item;
+            slott.GetComponent<SapkaSlot>().sapka = sapka;
         }
     }
 
     public void SelectSapka(Sapka sapka)
     {
         selectedSapka = sapka;
-        PurchasedManager.instance.currentSapka = sapka;
+        PurchasedManager.instance.SatinAl(sapka);
     }
 
 }

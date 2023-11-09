@@ -20,6 +20,8 @@ public class MusicManager : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("isMusicOn") == 0) audioSource.mute = true;
         else if (PlayerPrefs.GetInt("isMusicOn") == 1) audioSource.mute = false;
+        
+        
     }
 
     public void ToggleMusic()

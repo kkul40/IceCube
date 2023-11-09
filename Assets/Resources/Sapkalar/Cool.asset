@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cool
   m_EditorClassIdentifier: 
   names: Cool
-  price: 0
-  icon: {fileID: 21300000, guid: 17efae84a6535084fbf920c012f368a8, type: 3}
+  price: 10
+  icon: {fileID: 21300000, guid: 2f8210a37aa486b469ef9359c30db411, type: 3}
   isSold: 0
   Prefab: {fileID: 2581897089315809570, guid: 631915fc4a2b6c94da7eb544d4f0fb58, type: 3}

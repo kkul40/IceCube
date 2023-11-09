@@ -16,11 +16,15 @@ public class PurchasedManager : MonoBehaviour
     }
     
     
-    public bool SatinAl(int fiyat)
+    public bool SatinAl(Sapka sapka)
     {
-        if (SaveHelper.GetCandyCount() - fiyat < 0) return false;
+        if (sapka.isSold) return true;
         
-        SaveHelper.SaveCandy(-fiyat);
+        if (SaveHelper.GetCandyCount() - sapka.price < 0) return false;
+        
+        SaveHelper.SaveCandy(-sapka.price);
+        currentSapka = sapka;
+        sapka.isSold = true;
         return true;
     }
     

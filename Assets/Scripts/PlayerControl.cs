@@ -13,7 +13,6 @@ public class PlayerControl : MonoBehaviour, IDamagable
 
     [SerializeField] private Transform OlumEffectPrefab;
 
-    public Transform SapkaSlotu;
 
     public PostProcessVolume ppVolum;
 
@@ -23,6 +22,7 @@ public class PlayerControl : MonoBehaviour, IDamagable
     public int CandyCount;
 
     private PlayerAnimation _playerAnimation;
+    private SapkaScr _sapkaScr;
 
     private Inputs inputs;
 
@@ -38,6 +38,7 @@ public class PlayerControl : MonoBehaviour, IDamagable
         _spriteR = GetComponentInChildren<SpriteRenderer>();
 
         _playerAnimation = GetComponentInChildren<PlayerAnimation>();
+        _sapkaScr = GetComponent<SapkaScr>();
 
         // GameData.instance.StartPos = transform;// Simdilik yaptik bunu; sonradan silicez
         MovementLock = false;
@@ -70,12 +71,18 @@ public class PlayerControl : MonoBehaviour, IDamagable
         if (moveDelta != Vector2.zero && !MovementLock)
         {
             _playerAnimation._animator.SetBool("isWalking", true);
-            
-            
+
+
             if (moveDelta.x > 0)
+            {
                 _spriteR.flipX = false;
+                _sapkaScr.FlipSapka(false);
+            }
             else
+            {
+                _sapkaScr.FlipSapka(true);
                 _spriteR.flipX = true;
+            }
         }
         else
         {
