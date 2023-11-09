@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MusicManager : MonoBehaviour
 {
@@ -43,5 +44,17 @@ public class MusicManager : MonoBehaviour
             audioSource.volume = Mathf.SmoothDamp(audioSource.volume, 0, ref velocity, 0.5f);
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    public void SetMusicVolume(Slider slider)
+    {
+        audioSource.volume = slider.value;
+        PlayerPrefs.SetFloat("MusicVolume", slider.value);
+    }
+    
+    public void SetSoundEffectVolume(Slider slider)
+    {
+        oneShot.volume = slider.value;
+        PlayerPrefs.SetFloat("SoundEffectVolume", slider.value);
     }
 }
