@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,9 @@ public class RewardAD : MonoBehaviour
 {
     [SerializeField] private string androidID;
     [SerializeField] private string iosID;
-  
+
+    public static event Action RewardCandy;
+    
     private string _adUnitId;
     private void InitADUnit()
     {
@@ -60,7 +63,8 @@ public class RewardAD : MonoBehaviour
         {
             rewardedAd.Show((Reward reward) =>
             {
-               SaveHelper.SaveCandy(5);
+                SaveManager.instance.allGameDataHolder.CandyCount += 5;
+                RewardCandy?.Invoke();
             });
         }
     }

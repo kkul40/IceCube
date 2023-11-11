@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d50c67f3fc84da0913b2a229282b8b6, type: 3}
   m_Name: Chef
   m_EditorClassIdentifier: 
+  id: 1
   names: Chef
   price: 10
   icon: {fileID: 21300000, guid: 3538dca54c27a76438133421032a5a78, type: 3}

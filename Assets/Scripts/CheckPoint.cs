@@ -7,9 +7,10 @@ public class CheckPoint : MonoBehaviour
     {
         if (other.transform.TryGetComponent(out PlayerControl playerControl))
         {
-            SaveHelper.SavePlayerPos(transform.position);
+            SaveManager.instance.allGameDataHolder.PlayerLastCheckedPosition = transform.position;
             Camera.main.transform.position = transform.position;
             MusicManager.instance.PlayAudio(checkPointAudio);
+            SaveManager.instance.SaveGame();
         }
     }
 } 

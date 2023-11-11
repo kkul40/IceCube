@@ -13,16 +13,20 @@ public class SugarBarUi : MonoBehaviour
 
     private void OnEnable()
     {
-        SaveHelper.OnCandyCollected += UpdateText;
+        CandyBehaviour.OnCandyCollected += UpdateText;
+        RewardAD.RewardCandy += UpdateText;
+        SaveManager.GameSaved += UpdateText;
     }
     
     private void OnDisable()
     {
-        SaveHelper.OnCandyCollected -= UpdateText;
+        CandyBehaviour.OnCandyCollected -= UpdateText;
+        RewardAD.RewardCandy -= UpdateText;
+        SaveManager.GameSaved -= UpdateText;
     }
 
     private void UpdateText()
     {
-        textForCandy.text = SaveHelper.GetCandyCount().ToString();
+        textForCandy.text = SaveManager.instance.allGameDataHolder.CandyCount.ToString();
     }
 }

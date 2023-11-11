@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d50c67f3fc84da0913b2a229282b8b6, type: 3}
   m_Name: Police
   m_EditorClassIdentifier: 
+  id: 4
   names: Police
   price: 10
   icon: {fileID: 21300000, guid: 8c2c1b2634af27d4ebb6f83b890d6a1b, type: 3}

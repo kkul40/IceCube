@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d50c67f3fc84da0913b2a229282b8b6, type: 3}
   m_Name: Witch
   m_EditorClassIdentifier: 
+  id: 6
   names: Witch
   price: 10
   icon: {fileID: 21300000, guid: 000b49f96c0f0f349a1351dd5f76a365, type: 3}

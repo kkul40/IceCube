@@ -10,29 +10,26 @@ public class MusicManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(this.gameObject);
-        
-        DontDestroyOnLoad(this);
+        if (instance != null && instance != this) 
+            Destroy(this.gameObject); 
+        else 
+            instance = this; 
     }
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-
-        if (PlayerPrefs.GetInt("isMusicOn") == 0) audioSource.mute = true;
-        else if (PlayerPrefs.GetInt("isMusicOn") == 1) audioSource.mute = false;
+        
+        audioSource.mute = SaveManager.instance.allGameDataHolder.isMuted;
+        audioSource.volume = SaveManager.instance.allGameDataHolder.MusicVolume;
+        oneShot.volume = SaveManager.instance.allGameDataHolder.SoundEffectVolume;
     }
 
     public void ToggleMusic()
     {
         audioSource.mute = !audioSource.mute;
-        if (audioSource.mute) PlayerPrefs.SetInt("isMusicOn", 0);
-        else PlayerPrefs.SetInt("isMusicOn", 1);
+        SaveManager.instance.allGameDataHolder.isMuted = audioSource.mute;
     }
-
 
     public void PlayAudio(AudioClip sound)
     {
@@ -41,7 +38,6 @@ public class MusicManager : MonoBehaviour
 
     public IEnumerator LowerSound()
     {
-
         float velocity = 0f;
         while (audioSource.volume > 0.001f)
         {
@@ -53,12 +49,12 @@ public class MusicManager : MonoBehaviour
     public void SetMusicVolume(Slider slider)
     {
         audioSource.volume = slider.value;
-        PlayerPrefs.SetFloat("MusicVolume", slider.value);
+        SaveManager.instance.allGameDataHolder.MusicVolume = slider.value;
     }
     
     public void SetSoundEffectVolume(Slider slider)
     {
         oneShot.volume = slider.value;
-        PlayerPrefs.SetFloat("SoundEffectVolume", slider.value);
+        SaveManager.instance.allGameDataHolder.SoundEffectVolume = slider.value;
     }
 }

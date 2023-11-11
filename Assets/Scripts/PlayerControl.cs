@@ -43,7 +43,7 @@ public class PlayerControl : MonoBehaviour, IDamagable
         // GameData.instance.StartPos = transform;// Simdilik yaptik bunu; sonradan silicez
         MovementLock = false;
         isDead = false;
-        transform.position = SaveHelper.LoadPlayerPos();
+        transform.position = SaveManager.instance.allGameDataHolder.PlayerLastCheckedPosition;
     }
 
 

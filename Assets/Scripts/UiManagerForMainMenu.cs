@@ -25,6 +25,8 @@ public class UiManagerForMainMenu : MonoBehaviour
 
     public void QuitGame()
     {
+        Debug.Log("Game Exit");
+        SaveManager.instance.SaveGame();
         Application.Quit();
     }
 

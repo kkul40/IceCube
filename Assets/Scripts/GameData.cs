@@ -24,10 +24,9 @@ public class GameData : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            SaveHelper.SavePlayerPos(StartPos.position);
         }
         else
-            Destroy(this);
+            Destroy(this.gameObject);
         
         DontDestroyOnLoad(this);
 

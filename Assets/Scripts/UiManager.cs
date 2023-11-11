@@ -32,6 +32,7 @@ public class UiManager : MonoBehaviour
     {
         MusicManager.instance.PlayAudio(MainMenuSound);
         StartCoroutine(LoadScene(0));
+        SaveManager.instance.SaveGame();
     }
 
     public void RestartGame()
@@ -40,10 +41,12 @@ public class UiManager : MonoBehaviour
 
         MusicManager.instance.PlayAudio(RestartGameSound);
         StartCoroutine(LoadScene(1));
+        SaveManager.instance.SaveGame();
     }
 
     IEnumerator LoadScene(int a)
     {
+        SaveManager.instance.SaveGame();
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(a);
     }
