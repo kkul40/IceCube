@@ -1,28 +1,15 @@
-using UnityEngine;
-using UnityEngine.UI;
+using Unity.VisualScripting;
 
-public class MusicVolumeSlider : MonoBehaviour
+public class MusicVolumeSlider : VolumeSlider
 {
-    private Slider slider;
-    public string name;
-
-    private MusicManager _musicManager;
-    void Start()
+    protected override void Start()
     {
-        slider = GetComponent<Slider>();
-        _musicManager = FindObjectOfType<MusicManager>();
-
-        slider.value = PlayerPrefs.GetFloat(name);
+        base.Start();
+        slider.value = SaveManager.instance.allGameDataHolder.MusicVolume;
     }
 
-    public void OnChangeMusic()
+    public override void OnValueChanged()
     {
         _musicManager.SetMusicVolume(slider);
     }
-    
-    public void OnChangeSoundEffect()
-    {
-        _musicManager.SetSoundEffectVolume(slider);
-    }
-
 }
