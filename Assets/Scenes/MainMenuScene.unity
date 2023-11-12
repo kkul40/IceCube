@@ -5629,7 +5629,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 518fcbb58182be34e8cebcff8c68847b, type: 2}
   - {fileID: 11400000, guid: 9a1eb70f7ea09654e869d2699e2edfca, type: 2}
   - {fileID: 11400000, guid: ba84bb7ba3994c04b887bf606e8f7044, type: 2}
-  currentSapka: {fileID: 0}
+  currentSapka: {fileID: 11400000, guid: b50581e528285374c99578de5dce8d70, type: 2}
 --- !u!4 &8099088362235888074
 Transform:
   m_ObjectHideFlags: 0
