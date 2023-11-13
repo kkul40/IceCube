@@ -17,7 +17,8 @@ public class SapkaSlot : MonoBehaviour
     private void Start()
     {
         sprite.sprite = sapka.icon;
-        price.text = sapka.price.ToString();
+        if(sapka.isSold) price.text = "Purchased";
+        else price.text = sapka.price.ToString();
         name.text = sapka.name;
         sapkaElements = FindObjectOfType<sapkaElements>();
     }
@@ -25,6 +26,8 @@ public class SapkaSlot : MonoBehaviour
     public void OnClick()
     {
         sapkaElements.SelectSapka(sapka);
+        if(sapka.isSold) price.text = "Purchased";
+        else price.text = sapka.price.ToString();
     }
 
 }
