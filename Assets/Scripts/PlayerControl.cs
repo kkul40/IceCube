@@ -17,6 +17,7 @@ public class PlayerControl : MonoBehaviour, IDamagable
     public PostProcessVolume ppVolum;
 
     public AudioClip olumMusic;
+    public AudioClip jumpMusic;
 
 
     public int CandyCount;
@@ -187,5 +188,6 @@ public class PlayerControl : MonoBehaviour, IDamagable
     public void Jumping()
     {
         rb2.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        MusicManager.instance.PlayAudio(jumpMusic);
     }
 }
