@@ -90,7 +90,7 @@ public class PlayerControl : MonoBehaviour, IDamagable
             _playerAnimation._animator.SetBool("isWalking", false);
         }
 
-        if (inputs.Penguin.Zipla.triggered && IsGrounded()) rb2.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        if(inputs.Penguin.Zipla.WasPerformedThisFrame()) Jumping();
 
         if (transform.position.y <= -35) TakeDamage();
     }
@@ -187,7 +187,10 @@ public class PlayerControl : MonoBehaviour, IDamagable
     } 
     public void Jumping()
     {
-        rb2.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        MusicManager.instance.PlayAudio(jumpMusic);
+        if (IsGrounded())
+        {
+            rb2.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            MusicManager.instance.PlayAudio(jumpMusic);
+        }
     }
 }
