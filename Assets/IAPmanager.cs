@@ -7,9 +7,17 @@ using UnityEngine.SceneManagement;
 
 public class IAPmanager : MonoBehaviour
 {
-
+    public GameObject reklamADS;
     private void Start()
     {
+        if (PlayerPrefs.GetInt("reklam") == 1)
+        {
+            reklamADS.SetActive(false);
+        }
+        else
+        {
+            reklamADS.SetActive(true);
+        }
         StandardPurchasingModule.Instance().useFakeStoreAlways = true;
     }
 
@@ -24,6 +32,7 @@ public class IAPmanager : MonoBehaviour
             
         }
     }
+    
     public void OnPurchaseFailed(Product product, PurchaseFailureReason purchaseFailureReason)
     {
         print("baþarýsýz");
@@ -31,9 +40,11 @@ public class IAPmanager : MonoBehaviour
 
     private void removeAds()
     {
-        SceneManager.LoadScene(0);
-        GameObject.FindGameObjectWithTag("ReklamADS").SetActive(false);
         
+        PlayerPrefs.SetInt("reklam", 1);
+        SceneManager.LoadScene(0);
+        
+
 
     }
 }

@@ -269,6 +269,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 36752895}
   m_CullTransparentMesh: 1
+--- !u!1 &53298441 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6356025970621385670, guid: b99f1342dbed59c46b1d043e90bb6c6d, type: 3}
+  m_PrefabInstance: {fileID: 3648269133007479464}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &57882541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1665,6 +1670,76 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 407797206}
   m_CullTransparentMesh: 1
+--- !u!1 &429054800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 429054802}
+  - component: {fileID: 429054801}
+  m_Layer: 0
+  m_Name: IAP Listener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &429054801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429054800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f7dd963c1a8b427b96975fa211478a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  consumePurchase: 1
+  dontDestroyOnLoad: 1
+  onProductsFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2859523753392359997}
+        m_TargetAssemblyTypeName: IAPmanager, Assembly-CSharp
+        m_MethodName: OnPurchaseComplete
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseDetailedFailedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!4 &429054802
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429054800}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.169623, y: -4.9804316, z: 1.811193}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &548169623
 GameObject:
   m_ObjectHideFlags: 0
@@ -3988,7 +4063,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3341998052287856182, guid: b99f1342dbed59c46b1d043e90bb6c6d, type: 3}
   m_PrefabInstance: {fileID: 3648269133007479464}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 53298441}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d35526b94c3279439852a1c58cba394, type: 3}
@@ -5386,6 +5461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7406feb558be1f4cab0c30291612d61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reklamADS: {fileID: 53298441}
 --- !u!82 &2939901945277959013
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5568,6 +5644,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ReklamADS
       objectReference: {fileID: 0}
+    - target: {fileID: 6356025970621385670, guid: b99f1342dbed59c46b1d043e90bb6c6d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5682,6 +5762,7 @@ MonoBehaviour:
     PlayerLastCheckedPosition: {x: 0, y: 0, z: 0}
     CandyCount: 0
     CurrentSapkaID: 0
+    showTutorial: 1
     MusicVolume: 1
     SoundEffectVolume: 1
     isMuted: 0
@@ -5716,3 +5797,4 @@ SceneRoots:
   - {fileID: 6093568186840790612}
   - {fileID: 1717497002062055534}
   - {fileID: 8099088362235888074}
+  - {fileID: 429054802}
