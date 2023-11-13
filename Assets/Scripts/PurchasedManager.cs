@@ -27,11 +27,13 @@ public class PurchasedManager : MonoBehaviour
 
     public bool SatinAl(Sapka sapka)
     {
-        currentSapka = sapka;
-        SaveManager.instance.allGameDataHolder.CurrentSapkaID = sapka.id;
-        SaveManager.instance.SaveGame();
-
-        if (sapka.isSold) return true;
+        if (sapka.isSold)
+        {
+            currentSapka = sapka;
+            SaveManager.instance.allGameDataHolder.CurrentSapkaID = sapka.id;
+            SaveManager.instance.SaveGame();
+            return true;
+        }
         
         if (SaveManager.instance.allGameDataHolder.CandyCount - sapka.price < 0) return false;
         
