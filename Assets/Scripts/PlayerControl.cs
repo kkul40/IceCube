@@ -146,11 +146,10 @@ public class PlayerControl : MonoBehaviour, IDamagable
         MusicManager.instance.PlayAudio(olumMusic);
         while (ppVolum.weight < 0.99f)
         {
-            ppVolum.weight = Mathf.SmoothDamp(ppVolum.weight, 1, ref velocity, 1);
+            ppVolum.weight = Mathf.SmoothDamp(ppVolum.weight, 1, ref velocity, 0.5f);
             yield return new WaitForEndOfFrame();
         }
 
-        yield return new WaitForSeconds(1f);
         GameData.instance.RestartScene();
     }
 

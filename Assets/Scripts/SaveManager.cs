@@ -19,7 +19,14 @@ public class SaveManager : MonoBehaviour
             instance = this; 
         
         DontDestroyOnLoad(this);
+        
         savePath = Path.Combine(Application.persistentDataPath, "saveData.json");
+
+        if (!File.Exists(savePath))
+        {
+            File.Create(Application.persistentDataPath + "/saveData.json");
+        }
+        
         allGameDataHolder = new AllGameDataHolder();
         allGameDataHolder = LoadGame();
     }
