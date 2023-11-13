@@ -43,6 +43,7 @@ namespace Cainos.PixelArtPlatformer_VillageProps
         public void Collect()
         {
             Open();
+            GameObject.FindObjectOfType<UiManager>().OpenFinishSeason();
             MusicManager.instance.PlayAudio(chestSound);
             Time.timeScale = 0.5f;
         }

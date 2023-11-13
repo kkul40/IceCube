@@ -75,6 +75,9 @@ public class AllGameDataHolder
     public int CandyCount = 0;
     public int CurrentSapkaID = 0;
     
+    // CanvasData
+    public bool showTutorial = true;
+    
     
     // SoundData
     public float MusicVolume = 1;

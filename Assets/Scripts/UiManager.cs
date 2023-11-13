@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,10 +12,27 @@ public class UiManager : MonoBehaviour
     [Header("AnaMenuu")] 
     [Header("Music")] private int b;
 
+    public GameObject FinishSeasonGameObject;
+    public GameObject Tutorial;
 
     public AudioClip TogglePauseSound;
     public AudioClip RestartGameSound;
     public AudioClip MainMenuSound;
+
+    private void Start()
+    {
+        if(SaveManager.instance.allGameDataHolder.showTutorial) Tutorial.SetActive(true);
+    }
+
+    public void OpenFinishSeason()
+    {
+        FinishSeasonGameObject.SetActive(true);
+    }
+
+    public void CloseFinishSeason()
+    {
+        FinishSeasonGameObject.SetActive(false);
+    }
 
 
     public void ToggleMusicOnOff()

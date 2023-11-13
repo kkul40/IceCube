@@ -2043,7 +2043,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 103548327}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 963854598}
+        m_TargetAssemblyTypeName: TutorialPage, Assembly-CSharp
+        m_MethodName: Next
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &103548327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4223,7 +4235,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 183401632}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 963854598}
+        m_TargetAssemblyTypeName: TutorialPage, Assembly-CSharp
+        m_MethodName: Next
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &183401632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7244,7 +7268,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 340080158}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 963854598}
+        m_TargetAssemblyTypeName: TutorialPage, Assembly-CSharp
+        m_MethodName: Next
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &340080158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14553,7 +14589,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 743143676}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 963854598}
+        m_TargetAssemblyTypeName: TutorialPage, Assembly-CSharp
+        m_MethodName: Next
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &743143676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14824,7 +14872,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 752684151}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 963854598}
+        m_TargetAssemblyTypeName: TutorialPage, Assembly-CSharp
+        m_MethodName: Next
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &752684151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16412,6 +16472,7 @@ MonoBehaviour:
     PlayerLastCheckedPosition: {x: 0, y: 0, z: 0}
     CandyCount: 0
     CurrentSapkaID: 0
+    showTutorial: 1
     MusicVolume: 1
     SoundEffectVolume: 1
     isMuted: 0
@@ -18602,6 +18663,7 @@ GameObject:
   - component: {fileID: 963854595}
   - component: {fileID: 963854597}
   - component: {fileID: 963854596}
+  - component: {fileID: 963854598}
   m_Layer: 5
   m_Name: TutorialPanel
   m_TagString: Untagged
@@ -18671,6 +18733,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963854594}
   m_CullTransparentMesh: 1
+--- !u!114 &963854598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963854594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9bd51c545cc38642ba1bea086a4de42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stages:
+  - {fileID: 1394439716}
+  - {fileID: 488940445}
+  - {fileID: 145916240}
+  - {fileID: 2143085370}
+  - {fileID: 420380727}
+  currentStage: 0
 --- !u!1001 &964308351
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23689,7 +23770,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1256038968}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1617844195}
+        m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
+        m_MethodName: LoadMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1256038968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25077,7 +25170,7 @@ Transform:
   m_GameObject: {fileID: 1305617457}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.97, y: -3.5, z: -10}
+  m_LocalPosition: {x: 88, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -52325,6 +52418,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AnaMenu: {fileID: 0}
   PauseMenu: {fileID: 1302277661}
+  FinishSeasonGameObject: {fileID: 0}
+  Tutorial: {fileID: 963854594}
   TogglePauseSound: {fileID: 8300000, guid: 7096c237e384d435ab4bf80e18bf6a18, type: 3}
   RestartGameSound: {fileID: 8300000, guid: 7096c237e384d435ab4bf80e18bf6a18, type: 3}
   MainMenuSound: {fileID: 8300000, guid: 7096c237e384d435ab4bf80e18bf6a18, type: 3}
@@ -53827,7 +53922,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1712498676}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 963854598}
+        m_TargetAssemblyTypeName: TutorialPage, Assembly-CSharp
+        m_MethodName: CloseTutorial
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1712498676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61201,7 +61308,7 @@ Transform:
   m_GameObject: {fileID: 2068624505}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.97, y: -3.5, z: -10}
+  m_LocalPosition: {x: 88, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -62582,11 +62689,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2572756708273174185, guid: ad8fc3d79a7c26142be5f4fa43c0ebed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.97
+      value: 88
       objectReference: {fileID: 0}
     - target: {fileID: 2572756708273174185, guid: ad8fc3d79a7c26142be5f4fa43c0ebed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.5
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2572756708273174185, guid: ad8fc3d79a7c26142be5f4fa43c0ebed, type: 3}
       propertyPath: m_LocalPosition.z
