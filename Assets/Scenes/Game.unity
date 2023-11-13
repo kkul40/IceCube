@@ -62869,6 +62869,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1801315382710258375, guid: b99f1342dbed59c46b1d043e90bb6c6d, type: 3}
+      propertyPath: androidID
+      value: ca-app-pub-3184543784766268/8269531399
+      objectReference: {fileID: 0}
     - target: {fileID: 2770416296474195873, guid: b99f1342dbed59c46b1d043e90bb6c6d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 147.71564
@@ -62909,13 +62913,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3341998052287856182, guid: b99f1342dbed59c46b1d043e90bb6c6d, type: 3}
+      propertyPath: androidID
+      value: ca-app-pub-3184543784766268/4853030562
+      objectReference: {fileID: 0}
     - target: {fileID: 3854014426916318594, guid: b99f1342dbed59c46b1d043e90bb6c6d, type: 3}
-      propertyPath: m
-      value: 
-      objectReference: {fileID: 3831873786091313988, guid: 3fd315166c7682d4c92e62b4936d97fe, type: 3}
+      propertyPath: androidID
+      value: ca-app-pub-3184543784766268/4789203969
+      objectReference: {fileID: 0}
     - target: {fileID: 6356025970621385670, guid: b99f1342dbed59c46b1d043e90bb6c6d, type: 3}
       propertyPath: m_Name
       value: ReklamADS
+      objectReference: {fileID: 0}
+    - target: {fileID: 6356025970621385670, guid: b99f1342dbed59c46b1d043e90bb6c6d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

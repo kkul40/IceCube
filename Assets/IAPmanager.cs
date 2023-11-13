@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Purchasing;
+using UnityEngine.SceneManagement;
 
 public class IAPmanager : MonoBehaviour
 {
@@ -29,8 +31,9 @@ public class IAPmanager : MonoBehaviour
 
     private void removeAds()
     {
-
-        GameObject.Find("ADSButton").SetActive(false);
+        SceneManager.LoadScene(0);
+        GameObject.FindGameObjectWithTag("ReklamADS").SetActive(false);
+        
 
     }
 }

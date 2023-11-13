@@ -5552,10 +5552,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3854014426916318594, guid: b99f1342dbed59c46b1d043e90bb6c6d, type: 3}
-      propertyPath: m
-      value: 
-      objectReference: {fileID: 3831873786091313988, guid: 3fd315166c7682d4c92e62b4936d97fe, type: 3}
     - target: {fileID: 6356025970621385670, guid: b99f1342dbed59c46b1d043e90bb6c6d, type: 3}
       propertyPath: m_Name
       value: ReklamADS
