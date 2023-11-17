@@ -40,7 +40,7 @@ public class IAPmanager : MonoBehaviour
 
     private void removeAds()
     {
-        
+        reklamADS.SetActive(false);
         PlayerPrefs.SetInt("reklam", 1);
         SceneManager.LoadScene(0);
         

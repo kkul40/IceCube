@@ -5644,10 +5644,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ReklamADS
       objectReference: {fileID: 0}
-    - target: {fileID: 6356025970621385670, guid: b99f1342dbed59c46b1d043e90bb6c6d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
