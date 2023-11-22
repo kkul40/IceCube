@@ -21,8 +21,7 @@ public class PurchasedManager : MonoBehaviour
 
     private void Start()
     {
-        var id = SaveManager.instance.allGameDataHolder.CurrentSapkaID;
-        currentSapka = sapkalar.Find(obj => obj.id == id);
+        var id = SaveManager.instance.allGameDataHolder.CurrentSapkaID;        currentSapka = sapkalar.Find(obj => obj.id == id);
     }
 
     public bool SatinAl(Sapka sapka)
