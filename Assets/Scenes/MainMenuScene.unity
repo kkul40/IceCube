@@ -5173,7 +5173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2652002969291662556, guid: 761d45c9bbc4518449c878cbbcba0e21, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2652002969291662557, guid: 761d45c9bbc4518449c878cbbcba0e21, type: 3}
       propertyPath: m_Pivot.x
@@ -5610,6 +5610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e5510336b8d469b835a5d022242bb2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buySound: {fileID: 8300000, guid: b9703806690cb49a58ab182032cad276, type: 3}
   sapkalar:
   - {fileID: 11400000, guid: d21277413c042f54eb3d236a10ae3396, type: 2}
   - {fileID: 11400000, guid: b50581e528285374c99578de5dce8d70, type: 2}

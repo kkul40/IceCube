@@ -5,6 +5,7 @@ using UnityEngine;
 public class PurchasedManager : MonoBehaviour
 {
     public static PurchasedManager instance;
+    public AudioClip buySound;
     public List<Sapka> sapkalar;
 
     public Sapka currentSapka;
@@ -36,6 +37,7 @@ public class PurchasedManager : MonoBehaviour
         
         if (SaveManager.instance.allGameDataHolder.CandyCount - sapka.price < 0) return false;
         
+        MusicManager.instance.PlayAudio(buySound);
         currentSapka = sapka;
         SaveManager.instance.allGameDataHolder.CandyCount -= sapka.price;
         SaveManager.instance.allGameDataHolder.CurrentSapkaID = sapka.id;
