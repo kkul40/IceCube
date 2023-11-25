@@ -16522,6 +16522,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed9b63eb6d4c6da4aa6072d86950c741, type: 3}
+--- !u!1 &852788866 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9038411915091322554, guid: ad8fc3d79a7c26142be5f4fa43c0ebed, type: 3}
+  m_PrefabInstance: {fileID: 1522037706559028188}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &854584301
 GameObject:
   m_ObjectHideFlags: 0
@@ -19117,18 +19122,6 @@ PrefabInstance:
       value: falling_snow
       objectReference: {fileID: 0}
     - target: {fileID: 485918, guid: adf34b037141b6346b5afdebc3ebe2b2, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 485918, guid: adf34b037141b6346b5afdebc3ebe2b2, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.47310013
-      objectReference: {fileID: 0}
-    - target: {fileID: 485918, guid: adf34b037141b6346b5afdebc3ebe2b2, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.60000014
-      objectReference: {fileID: 0}
-    - target: {fileID: 485918, guid: adf34b037141b6346b5afdebc3ebe2b2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.8
       objectReference: {fileID: 0}
@@ -19168,10 +19161,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 19928726, guid: adf34b037141b6346b5afdebc3ebe2b2, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 3467776702011192425, guid: adf34b037141b6346b5afdebc3ebe2b2, type: 3}
+      propertyPath: karakter
+      value: 
+      objectReference: {fileID: 852788866}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -53474,7 +53467,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8391679168705453799, guid: ad8fc3d79a7c26142be5f4fa43c0ebed, type: 3}
   m_PrefabInstance: {fileID: 1522037706559028188}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 852788866}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d668295b03846cc42a1ee6be3150cc77, type: 3}
