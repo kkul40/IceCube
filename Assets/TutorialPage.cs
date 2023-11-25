@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TutorialPage : MonoBehaviour
 {
+    public AudioClip pageButtonAudio;
     public List<GameObject> Stages;
 
     public int currentStage = 0;
@@ -20,6 +21,7 @@ public class TutorialPage : MonoBehaviour
 
     public void Next()
     {
+        MusicManager.instance.PlayAudio(pageButtonAudio);
         Stages[currentStage].SetActive(false);
         currentStage++;
         if (currentStage > Stages.Count - 1) return;
@@ -36,6 +38,7 @@ public class TutorialPage : MonoBehaviour
 
     public void CloseTutorial()
     {
+        MusicManager.instance.PlayAudio(pageButtonAudio);
         this.gameObject.SetActive(false);
         SaveManager.instance.allGameDataHolder.showTutorial = false;
         SaveManager.instance.SaveGame();

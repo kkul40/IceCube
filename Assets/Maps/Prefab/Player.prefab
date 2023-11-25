@@ -5042,6 +5042,7 @@ MonoBehaviour:
   OlumEffectPrefab: {fileID: 7819775807870019728, guid: f916833a9285b1244b9a2a6ef531b2a5, type: 3}
   ppVolum: {fileID: 0}
   olumMusic: {fileID: 8300000, guid: c8b1d2a6d011c784081cc9e718489ff1, type: 3}
+  jumpMusic: {fileID: 8300000, guid: 9c81708937d7b400f94950a59f4ca6bb, type: 3}
   CandyCount: 0
 --- !u!50 &3878220796936228529
 Rigidbody2D:
