@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CheckPoint
   - ReklamADS
+  - shop
   layers:
   - Default
   - TransparentFX

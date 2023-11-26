@@ -10314,7 +10314,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1008619286}
   - component: {fileID: 1008619285}
-  - component: {fileID: 1008619284}
   - component: {fileID: 1008619287}
   m_Layer: 0
   m_Name: Main Camera
@@ -10323,14 +10322,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1008619284
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1008619283}
-  m_Enabled: 1
 --- !u!20 &1008619285
 Camera:
   m_ObjectHideFlags: 0
@@ -10876,7 +10867,7 @@ GameObject:
   - component: {fileID: 1035047882}
   m_Layer: 5
   m_Name: ShopPage
-  m_TagString: Untagged
+  m_TagString: shop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

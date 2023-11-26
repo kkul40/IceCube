@@ -71,7 +71,7 @@ public class SaveManager : MonoBehaviour
 public class AllGameDataHolder
 {
     // PlayerData
-    public Vector3 PlayerLastCheckedPosition = new Vector3(-14, -3.5f, 0f);
+    public Vector3 PlayerLastCheckedPosition = new Vector3(-142, -6, 0);
     public int CandyCount = 0;
     public int CurrentSapkaID = 0;
     

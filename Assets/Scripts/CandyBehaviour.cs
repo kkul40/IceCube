@@ -11,5 +11,7 @@ public class CandyBehaviour : MonoBehaviour, IInteractable
         SaveManager.instance.allGameDataHolder.CandyCount += 1;
         OnCandyCollected?.Invoke();
         Destroy(this.gameObject);
+
+     
     }
 }
