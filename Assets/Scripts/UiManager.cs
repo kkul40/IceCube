@@ -26,7 +26,7 @@ public class UiManager : MonoBehaviour
 
     public void OpenFinishSeason()
     {
-        FinishSeasonGameObject.SetActive(true);
+      
     }
 
     public void CloseFinishSeason()
@@ -49,8 +49,10 @@ public class UiManager : MonoBehaviour
     public void LoadMainMenu()
     {
         MusicManager.instance.PlayAudio(MainMenuSound);
-        StartCoroutine(LoadScene(0));
+        //StartCoroutine(LoadScene(0));
         SaveManager.instance.SaveGame();
+        Application.Quit();
+        print("d");
     }
 
     public void RestartGame()

@@ -7,6 +7,7 @@ namespace Cainos.PixelArtPlatformer_VillageProps
     {
         [FoldoutGroup("Reference")] public Animator animator;
 
+        public GameObject finishScreen;
         public AudioClip chestSound;
 
         private bool isOpened;
@@ -43,9 +44,19 @@ namespace Cainos.PixelArtPlatformer_VillageProps
         public void Collect()
         {
             Open();
-            GameObject.FindObjectOfType<UiManager>().OpenFinishSeason();
+            //GameObject.FindObjectOfType<UiManager>().OpenFinishSeason();
             MusicManager.instance.PlayAudio(chestSound);
-            Time.timeScale = 0.5f;
+            
+            InvokeRepeating("Play", 5, 1);
+
+            
         }
+        public void Play()
+        {
+            finishScreen.SetActive(true);
+            Time.timeScale = 0.0f;
+        }
+
+        
     }
 }
