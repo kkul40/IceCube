@@ -1,7 +1,10 @@
 <dependencies>
   <packages>
-    <package>com.google.android.gms:play-services-ads:[22.3.0]</package>
-    <package>com.google.android.ump:user-messaging-platform:2.1.0</package>
+    <package>com.google.android.gms:play-services-ads-identifier:18.0.1</package>
+    <package>com.google.android.gms:play-services-basement:18.1.0</package>
+    <package>com.ironsource.adapters:unityadsadapter:4.3.34</package>
+    <package>com.ironsource.sdk:mediationsdk:7.5.2</package>
+    <package>com.unity3d.ads:unity-ads:4.9.2</package>
   </packages>
   <files />
   <settings>
